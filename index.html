@@ -1,4 +1,5 @@
 <!doctype html>
+<!-- Copyright 2026 Juri Janovski. SPDX-License-Identifier: Apache-2.0 -->
 <html lang="de">
 <head>
   <meta charset="utf-8">
@@ -11,23 +12,48 @@
   <a class="skip" href="#labor">Zum Labor springen</a>
   <main id="labor">
     <header class="hero">
-      <div class="eyebrow"><span class="beacon"></span> HALVETH / LUCINET · LOKALES LABOR 0.1</div>
+      <div class="eyebrow"><span class="beacon"></span> HALVETH / LUCINET · FELDLABOR 0.2</div>
       <h1>FIELD <em>DIFFERENCE</em> LAB</h1>
-      <p class="lead">Gleicher Start. Andere Feldregel. Beobachte, was sich an der Bahn ändert — und was die Simulation tatsächlich aussagt.</p>
-      <div class="hero-meta"><span>4 synchronisierte Welten</span><span>1 echter Regelübergang im Modell</span><span>dimensionslos · offline</span></div>
+      <p class="lead">Gleicher Start. Andere Regel. Beobachte, was sich an einer Feldbahn oder Software-Auswertung ändert — und was der Vergleich tatsächlich aussagt.</p>
+      <div class="hero-meta"><span>4 synchronisierte Welten</span><span>1 Feldgrenze</span><span>1 synthetische Software-Grenze</span><span>offline</span></div>
     </header>
 
     <section class="control-panel" aria-label="Laborsteuerung">
       <div class="tabbar" role="tablist" aria-label="Experiment">
         <button id="tab-worlds" role="tab" aria-selected="true" aria-controls="worlds" type="button">01 / Vier Welten</button>
         <button id="tab-boundary" role="tab" aria-selected="false" aria-controls="boundary" type="button">02 / Grenze durchqueren</button>
+        <button id="tab-security" role="tab" aria-selected="false" aria-controls="security" type="button">03 / Software-Grenze</button>
       </div>
-      <div class="transport">
+      <div id="transport" class="transport">
         <button id="play" type="button" aria-label="Animation pausieren">Ⅱ <span>Pausieren</span></button>
         <button id="reset" type="button">↺ <span>Neustart</span></button>
         <label for="time">Modellzeit <output id="time-label">0,00</output></label>
         <input id="time" type="range" min="0" max="1000" value="0" aria-label="Modellzeit">
       </div>
+    </section>
+
+    <section id="security" role="tabpanel" aria-labelledby="tab-security" hidden>
+      <div class="section-head"><p class="kicker">EXPERIMENT 03 · BUG-BOUNTY-ADAPTER</p><h2>Ein Text. Zwei Auswertungen.</h2>
+        <p>Dieselbe synthetische Eingabe durchläuft zwei ausdrücklich benannte Auswahlregeln. Das Labor zeigt einen Unterschied der Repräsentation. Für einen Sicherheitsbefund müssten danach ein konkreter Verbraucher, eine Berechtigungsentscheidung und eine geschützte Wirkung belegt werden.</p></div>
+      <div class="security-workbench">
+        <div class="security-editor">
+          <p class="kicker">EINGABE / NUR IN DIESEM BROWSER</p>
+          <label for="query-input">Synthetischer Query-String</label>
+          <input id="query-input" type="text" maxlength="512" value="color=blue&amp;color=red" spellcheck="false" autocomplete="off">
+          <label for="query-key">Vergleichsschlüssel</label>
+          <input id="query-key" type="text" maxlength="40" value="color" spellcheck="false" autocomplete="off">
+          <div class="examples" aria-label="Beispiele"><button type="button" data-query="color=blue&amp;color=red" data-key="color">Unterschied</button><button type="button" data-query="color=blue&amp;color=blue" data-key="color">Gleich</button><button type="button" data-query="shape=circle" data-key="color">Fehlender Wert</button></div>
+          <p class="editor-note">Lokale Modellwerte verwenden. Keine Zugangsdaten, fremden Anfragen oder Fallbeweise hier einfügen.</p>
+        </div>
+        <div class="security-diagram" aria-live="polite">
+          <div class="source-node"><span>QUELLE · CALLER-SUPPLIED</span><code id="source-view"></code></div>
+          <div class="rail-pair"><div class="rail first"><span>A / ERSTER WERT</span><strong id="first-value"></strong><small>Operator: URLSearchParams → values[0]</small></div><div class="rail last"><span>B / LETZTER WERT</span><strong id="last-value"></strong><small>Operator: URLSearchParams → values[last]</small></div></div>
+          <div class="delta-node"><span>BEOBACHTETER MODELL-DELTA</span><strong id="security-result"></strong><small id="security-detail"></small></div>
+        </div>
+      </div>
+      <div class="proof-ladder"><div><b>01</b><span>Lokale Regeldifferenz</span><strong id="gate-local">—</strong></div><div><b>02</b><span>Konkreter Zielpfad</span><strong>OFFEN</strong></div><div><b>03</b><span>Autorisierungswechsel</span><strong>OFFEN</strong></div><div><b>04</b><span>Geschützte Wirkung</span><strong>OFFEN</strong></div></div>
+      <div class="security-actions"><p><b>Die Brücke:</b> In der Feldsimulation wechselt eine physikalische Modellregel. Hier wechseln Auswahlregeln über derselben Eingabe. Die gemeinsame Forschungsform ist der kontrollierte Vergleich; Mechanismus und Belegpflicht bleiben domänenspezifisch.</p><button id="export-receipt" type="button">JSON-Prüfprotokoll herunterladen ↓</button></div>
+      <p id="security-error" class="input-error" role="alert" hidden></p>
     </section>
 
     <section id="worlds" role="tabpanel" aria-labelledby="tab-worlds">
@@ -52,7 +78,7 @@
       </div>
     </section>
 
-    <footer class="footnote"><p><b>Leseschlüssel.</b> Feld, Objekt, Anfangszustand, Regel, Grenze und Beobachtung sind hier explizit. Die beiden Experimente haben verschiedene Gleichungen und werden nicht als derselbe physikalische Mechanismus ausgegeben. Bei κ = 1 verschwindet die modellierte Beschleunigung. Vorhandene Geschwindigkeit bleibt erhalten.</p><p>Lokale synthetische Simulation · keine Sensordaten · keine Aussage über Antimaterie, Gravitonium oder reale Antigravitation. <a href="README.md">Modellvertrag und Prüfstand</a></p></footer>
+    <footer class="footnote"><p><b>Leseschlüssel.</b> Feld, Objekt, Anfangszustand, Regel, Grenze und Beobachtung sind hier explizit. Die beiden Experimente haben verschiedene Gleichungen und werden nicht als derselbe physikalische Mechanismus ausgegeben. Bei κ = 1 verschwindet die modellierte Beschleunigung. Vorhandene Geschwindigkeit bleibt erhalten.</p><p>Lokale synthetische Simulation · keine Sensordaten · keine Aussage über Antimaterie, Gravitonium oder reale Antigravitation. <a href="README.md">Modellvertrag und Prüfstand</a> · <a href="https://github.com/Juri-Halveth/halveth-field-difference-lab">Quellcode auf GitHub</a> · Juri Janovski / HALVETH · Apache-2.0</p></footer>
   </main>
   <script type="module" src="app.js"></script>
 </body>

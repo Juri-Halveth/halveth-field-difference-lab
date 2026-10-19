@@ -1,4 +1,6 @@
+// Copyright 2026 Juri Janovski. SPDX-License-Identifier: Apache-2.0
 import {CENTRAL, BOUNDARY, simulateCentral, simulateBoundary, boundaryStateAt} from './physics.js';
+import {evaluateSyntheticQuery} from './security-model.js';
 
 const worlds = [
   {kappa: 0, title: 'Anziehung', detail: 'Referenzfeld', color: '#78f1ef'},
@@ -17,6 +19,10 @@ const kappaSlider = document.querySelector('#kappa-right');
 const kappaValue = document.querySelector('#kappa-value');
 const stageKappa = document.querySelector('#stage-kappa');
 const boundaryMetrics = document.querySelector('#boundary-metrics');
+const queryInput = document.querySelector('#query-input');
+const queryKey = document.querySelector('#query-key');
+const securityError = document.querySelector('#security-error');
+let currentSecurityReceipt = null;
 let activeTab = 'worlds';
 let fraction = 0;
 let playing = !matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -137,7 +143,31 @@ function drawBoundary() {
   boundaryMetrics.innerHTML = `<dt>Region</dt><dd>${state.region === 'LEFT' ? 'A · links' : 'B · rechts'}</dd><dt>Grenzübertritt</dt><dd>t = ${fmt(state.crossingTime)}</dd><dt>Position</dt><dd>(${fmt(state.x)}, ${fmt(state.y)})</dd><dt>Vertikale Beschleunigung</dt><dd>${fmt(state.ay)} / t²</dd>`;
 }
 
+function renderSecurity() {
+  try {
+    const receipt = evaluateSyntheticQuery(queryInput.value, queryKey.value);
+    currentSecurityReceipt = receipt;
+    securityError.hidden = true;
+    document.querySelector('#source-view').textContent = receipt.source.raw || '(leer)';
+    document.querySelector('#first-value').textContent = receipt.left.value ?? 'UNBEKANNT';
+    document.querySelector('#last-value').textContent = receipt.right.value ?? 'UNBEKANNT';
+    const labels = {
+      DIVERGENT_SELECTION: 'Δ · UNTERSCHIED',
+      SAME_UNDER_DECLARED_RULES: '= · GLEICH UNTER DIESEN REGELN',
+      UNKNOWN_MISSING_KEY: '? · WERT FEHLT',
+    };
+    document.querySelector('#security-result').textContent = labels[receipt.result];
+    document.querySelector('#security-detail').textContent = `${receipt.values.length} Wert(e) für „${receipt.source.key}“ · Wirkung auf ein reales System: offen`;
+    document.querySelector('#gate-local').textContent = receipt.result === 'DIVERGENT_SELECTION' ? 'GEZEIGT' : receipt.result === 'UNKNOWN_MISSING_KEY' ? 'UNBEKANNT' : 'KEIN DELTA';
+  } catch (error) {
+    currentSecurityReceipt = null;
+    securityError.textContent = `Eingabe im lokalen Modell ungültig: ${error.message}`;
+    securityError.hidden = false;
+  }
+}
+
 function render() {
+  if (activeTab === 'security') {renderSecurity(); return;}
   const duration = activeTab === 'worlds' ? CENTRAL.duration : BOUNDARY.duration;
   timeLabel.value = fmt(fraction * duration);
   timeSlider.value = Math.round(fraction * 1000);
@@ -152,9 +182,10 @@ function updatePlayLabel() {
 function selectTab(tab) {
   activeTab = tab;
   fraction = 0;
-  document.querySelector('#worlds').hidden = tab !== 'worlds';
-  document.querySelector('#boundary').hidden = tab !== 'boundary';
-  for (const id of ['worlds', 'boundary']) {
+  if (tab === 'security') {playing = false; updatePlayLabel();}
+  document.querySelector('#transport').hidden = tab === 'security';
+  for (const id of ['worlds', 'boundary', 'security']) {
+    document.querySelector(`#${id}`).hidden = tab !== id;
     document.querySelector(`#tab-${id}`).setAttribute('aria-selected', String(id === tab));
   }
   render();
@@ -162,6 +193,7 @@ function selectTab(tab) {
 
 document.querySelector('#tab-worlds').addEventListener('click', () => selectTab('worlds'));
 document.querySelector('#tab-boundary').addEventListener('click', () => selectTab('boundary'));
+document.querySelector('#tab-security').addEventListener('click', () => selectTab('security'));
 playButton.addEventListener('click', () => {playing = !playing; updatePlayLabel();});
 resetButton.addEventListener('click', () => {fraction = 0; render();});
 timeSlider.addEventListener('input', () => {fraction = Number(timeSlider.value) / 1000; playing = false; updatePlayLabel(); render();});
@@ -171,6 +203,23 @@ kappaSlider.addEventListener('input', () => {
   kappaValue.value = fmt(boundaryOptions.kappaRight, 2);
   stageKappa.textContent = fmt(boundaryOptions.kappaRight, 2);
   render();
+});
+queryInput.addEventListener('input', renderSecurity);
+queryKey.addEventListener('input', renderSecurity);
+document.querySelectorAll('.examples button').forEach(button => button.addEventListener('click', () => {
+  queryInput.value = button.dataset.query;
+  queryKey.value = button.dataset.key;
+  renderSecurity();
+}));
+document.querySelector('#export-receipt').addEventListener('click', () => {
+  if (!currentSecurityReceipt) return;
+  const blob = new Blob([JSON.stringify(currentSecurityReceipt, null, 2) + '\n'], {type: 'application/json'});
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = 'field-difference-local-model-receipt.json';
+  link.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
 });
 
 function animate(now) {

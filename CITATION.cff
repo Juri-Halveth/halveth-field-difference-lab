@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as follows."
+type: software
+authors:
+  - family-names: "Janovski"
+    given-names: "Juri"
+title: "HALVETH Field Difference Lab"
+version: "0.2.0"
+date-released: 2026-10-19
+license: Apache-2.0
+repository-code: "https://github.com/Juri-Halveth/halveth-field-difference-lab"
+url: "https://juri-halveth.github.io/halveth-field-difference-lab/"

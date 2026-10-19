@@ -1,0 +1,39 @@
+name: Test and publish Field Difference Lab
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Run model checks
+        run: npm test
+      - name: Prepare static site
+        run: |
+          mkdir -p _site
+          cp index.html style.css app.js physics.js security-model.js README.md SECURITY_ADAPTER.md PROJECT_IDENTITY.md LICENSE NOTICE _site/
+          touch _site/.nojekyll
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

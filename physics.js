@@ -1,3 +1,4 @@
+// Copyright 2026 Juri Janovski. SPDX-License-Identifier: Apache-2.0
 // Field Difference Lab v0.1 — deterministic, dimensionless model functions.
 export const CENTRAL = Object.freeze({
   model: 'SOFTENED_CENTRAL_FIELD', mu: 1, epsilon: 0.05,
