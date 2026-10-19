@@ -1,5 +1,5 @@
 // Copyright 2026 Juri Janovski. SPDX-License-Identifier: Apache-2.0
-// Field Difference Lab v0.1 — deterministic, dimensionless model functions.
+// Field Difference Lab — deterministic, dimensionless model functions.
 export const CENTRAL = Object.freeze({
   model: 'SOFTENED_CENTRAL_FIELD', mu: 1, epsilon: 0.05,
   initialPosition: [1, 0], initialVelocity: [0, 0.72], duration: 3.3, dt: 0.01,
@@ -25,14 +25,16 @@ export function centralAcceleration([x, y], kappa, mu = 1, epsilon = 0.05) {
 export function simulateCentral(kappa, options = CENTRAL) {
   finite(kappa, 'kappa');
   const {mu, epsilon, initialPosition, initialVelocity, duration, dt} = options;
-  if (duration <= 0 || dt <= 0 || !Number.isInteger(duration / dt)) {
+  [mu, epsilon, duration, dt, ...initialPosition, ...initialVelocity].forEach((v, i) => finite(v, `central option ${i}`));
+  const steps = Math.round(duration / dt);
+  if (duration <= 0 || dt <= 0 || steps < 1 || steps > 1_000_000 ||
+      Math.abs(steps * dt - duration) > 1e-9 * Math.max(1, duration)) {
     throw new RangeError('duration/dt must be a positive integer');
   }
   let [x, y] = initialPosition;
   let [vx, vy] = initialVelocity;
   let [ax, ay] = centralAcceleration([x, y], kappa, mu, epsilon);
   const result = [{t: 0, x, y, vx, vy, ax, ay}];
-  const steps = Math.round(duration / dt);
   for (let i = 1; i <= steps; i++) {
     x += vx * dt + 0.5 * ax * dt * dt;
     y += vy * dt + 0.5 * ay * dt * dt;
@@ -50,6 +52,7 @@ export function boundaryStateAt(t, options = BOUNDARY) {
   finite(t, 't');
   if (t < 0) throw new RangeError('t must be nonnegative');
   const {g, initialPosition: [x0, y0], initialVelocity: [vx0, vy0], kappaLeft, kappaRight} = options;
+  [g, x0, y0, vx0, vy0, kappaLeft, kappaRight].forEach((v, i) => finite(v, `boundary option ${i}`));
   if (vx0 <= 0 || x0 >= 0 || g <= 0) throw new RangeError('model requires left-to-right crossing and positive g');
   const crossingTime = -x0 / vx0;
   const aLeft = -g * (1 - kappaLeft);
@@ -69,11 +72,14 @@ export function boundaryStateAt(t, options = BOUNDARY) {
 
 export function simulateBoundary(options = BOUNDARY, dt = 0.01) {
   finite(dt, 'dt');
-  if (dt <= 0) throw new RangeError('dt must be positive');
+  finite(options.duration, 'duration');
+  if (dt <= 0 || options.duration <= 0) throw new RangeError('dt and duration must be positive');
   const samples = [];
   const steps = Math.ceil(options.duration / dt);
-  for (let i = 0; i <= steps; i++) {
-    samples.push(boundaryStateAt(Math.min(i * dt, options.duration), options));
+  if (steps > 1_000_000) throw new RangeError('too many boundary samples');
+  for (let i = 0; i < steps; i++) {
+    samples.push(boundaryStateAt(i * dt, options));
   }
+  samples.push(boundaryStateAt(options.duration, options));
   return samples;
 }

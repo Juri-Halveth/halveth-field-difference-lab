@@ -1,0 +1,474 @@
+{
+  "schema": "halveth.status-quo-navigation-receipt.v1",
+  "logicVersion": "3.5.1",
+  "entityVersion": "1.0.0",
+  "entityState": "STATUS_QUO_FROZEN",
+  "frameId": "FIELD_DIFFERENCE_LAB_AUDIT_20261019_V021",
+  "project": {
+    "domainAdapter": "SOFTWARE_BUILD",
+    "objective": "Reverse audit the visible lab, mobile behavior, runtime, content, authenticity and delivery.",
+    "objectOrReferent": "HALVETH Field Difference Lab 0.2.1 local candidate",
+    "scope": "Owned local source and published 0.2.0 baseline; no third-party target tests",
+    "deliverableType": "PROJECT_AUDIT",
+    "sourceRefs": [
+      "BASE_4C2CF6C",
+      "CANDIDATE_V021",
+      "AUDIT_MD_20261019"
+    ],
+    "acceptedBaselineRef": "BASE_4C2CF6C"
+  },
+  "scanPolicy": {
+    "horizontalMode": "FULL_DECLARED_ADAPTER_APERTURE",
+    "verticalPreviewDepth": 4,
+    "diagonalMode": "COMPLETE_MATERIAL_CANDIDATE_PAIR_GRAPH",
+    "selectiveDrillDepth": 4,
+    "noSelectiveDrillBeforeDiagonal": true,
+    "freezeMode": "VERSIONED_IMMUTABLE_BASELINE"
+  },
+  "adapterRequiredAxisIds": [
+    "USER_OUTCOME",
+    "INTERFACE",
+    "STATE_DATA",
+    "INTEGRATION",
+    "FAILURE_RECOVERY",
+    "SECURITY_PRIVACY",
+    "ACCESSIBILITY",
+    "DELIVERY_OBSERVABILITY"
+  ],
+  "registeredAxisIds": [
+    "ACCESSIBILITY",
+    "DELIVERY_OBSERVABILITY",
+    "FAILURE_RECOVERY",
+    "INTEGRATION",
+    "INTERFACE",
+    "MARKETING_PROOF",
+    "MOBILE_LAYOUT",
+    "MODEL_AUTHENTICITY",
+    "SECURITY_PRIVACY",
+    "STATE_DATA",
+    "USER_OUTCOME"
+  ],
+  "materialCandidateAxisIds": [
+    "ACCESSIBILITY",
+    "DELIVERY_OBSERVABILITY",
+    "INTEGRATION",
+    "MARKETING_PROOF",
+    "MODEL_AUTHENTICITY",
+    "USER_OUTCOME"
+  ],
+  "axisResults": [
+    {
+      "axisId": "ACCESSIBILITY",
+      "state": "UNKNOWN_MATERIAL",
+      "evidenceState": "UNKNOWN",
+      "horizontalReceiptRefs": [
+        "AUDIT_MD_20261019"
+      ],
+      "exclusionReason": null,
+      "verticalProbe": {
+        "state": "COVERED",
+        "completedDepth": 4,
+        "maximumDepth": 4,
+        "layerReceiptRefs": [
+          "PREVIEW_ACCESSIBILITY_L1",
+          "PREVIEW_ACCESSIBILITY_L2",
+          "PREVIEW_ACCESSIBILITY_L3",
+          "PREVIEW_ACCESSIBILITY_L4"
+        ],
+        "criticalUnknownCount": 1,
+        "deepDivePurpose": "MULTI_APERTURE_FIELD_PROBE"
+      },
+      "priorityVector": {
+        "objectiveRelevance": 4,
+        "criticality": 3,
+        "evidenceStrength": 2,
+        "authorizedActionability": 4,
+        "informationGain": 3,
+        "repairValue": 3,
+        "effortCost": 2,
+        "actionRisk": 1
+      },
+      "frontierRef": "FRONTIER_ACCESSIBILITY",
+      "basePriorityScore": 16,
+      "diagonalDelta": 0,
+      "collectiveScore": 16
+    },
+    {
+      "axisId": "DELIVERY_OBSERVABILITY",
+      "state": "UNKNOWN_MATERIAL",
+      "evidenceState": "UNKNOWN",
+      "horizontalReceiptRefs": [
+        "AUDIT_MD_20261019"
+      ],
+      "exclusionReason": null,
+      "verticalProbe": {
+        "state": "COVERED",
+        "completedDepth": 4,
+        "maximumDepth": 4,
+        "layerReceiptRefs": [
+          "PREVIEW_DELIVERY_OBSERVABILITY_L1",
+          "PREVIEW_DELIVERY_OBSERVABILITY_L2",
+          "PREVIEW_DELIVERY_OBSERVABILITY_L3",
+          "PREVIEW_DELIVERY_OBSERVABILITY_L4"
+        ],
+        "criticalUnknownCount": 1,
+        "deepDivePurpose": "MULTI_APERTURE_FIELD_PROBE"
+      },
+      "priorityVector": {
+        "objectiveRelevance": 4,
+        "criticality": 4,
+        "evidenceStrength": 3,
+        "authorizedActionability": 4,
+        "informationGain": 4,
+        "repairValue": 4,
+        "effortCost": 1,
+        "actionRisk": 1
+      },
+      "frontierRef": "FRONTIER_DELIVERY_OBSERVABILITY",
+      "basePriorityScore": 21,
+      "diagonalDelta": 0,
+      "collectiveScore": 21
+    },
+    {
+      "axisId": "FAILURE_RECOVERY",
+      "state": "STABLE_WITHIN_COVERAGE",
+      "evidenceState": "OBSERVED",
+      "horizontalReceiptRefs": [
+        "AUDIT_MD_20261019"
+      ],
+      "exclusionReason": null,
+      "verticalProbe": {
+        "state": "NOT_REQUIRED",
+        "completedDepth": 0,
+        "maximumDepth": 4,
+        "layerReceiptRefs": [],
+        "criticalUnknownCount": 0,
+        "deepDivePurpose": null
+      },
+      "priorityVector": {
+        "objectiveRelevance": 0,
+        "criticality": 0,
+        "evidenceStrength": 0,
+        "authorizedActionability": 0,
+        "informationGain": 0,
+        "repairValue": 0,
+        "effortCost": 0,
+        "actionRisk": 0
+      },
+      "frontierRef": null,
+      "basePriorityScore": 0,
+      "diagonalDelta": 0,
+      "collectiveScore": 0
+    },
+    {
+      "axisId": "INTEGRATION",
+      "state": "UNKNOWN_MATERIAL",
+      "evidenceState": "UNKNOWN",
+      "horizontalReceiptRefs": [
+        "AUDIT_MD_20261019"
+      ],
+      "exclusionReason": null,
+      "verticalProbe": {
+        "state": "COVERED",
+        "completedDepth": 4,
+        "maximumDepth": 4,
+        "layerReceiptRefs": [
+          "PREVIEW_INTEGRATION_L1",
+          "PREVIEW_INTEGRATION_L2",
+          "PREVIEW_INTEGRATION_L3",
+          "PREVIEW_INTEGRATION_L4"
+        ],
+        "criticalUnknownCount": 1,
+        "deepDivePurpose": "MULTI_APERTURE_FIELD_PROBE"
+      },
+      "priorityVector": {
+        "objectiveRelevance": 3,
+        "criticality": 4,
+        "evidenceStrength": 1,
+        "authorizedActionability": 1,
+        "informationGain": 3,
+        "repairValue": 1,
+        "effortCost": 4,
+        "actionRisk": 3
+      },
+      "frontierRef": "FRONTIER_INTEGRATION",
+      "basePriorityScore": 6,
+      "diagonalDelta": 0,
+      "collectiveScore": 6
+    },
+    {
+      "axisId": "INTERFACE",
+      "state": "STABLE_WITHIN_COVERAGE",
+      "evidenceState": "OBSERVED",
+      "horizontalReceiptRefs": [
+        "AUDIT_MD_20261019"
+      ],
+      "exclusionReason": null,
+      "verticalProbe": {
+        "state": "NOT_REQUIRED",
+        "completedDepth": 0,
+        "maximumDepth": 4,
+        "layerReceiptRefs": [],
+        "criticalUnknownCount": 0,
+        "deepDivePurpose": null
+      },
+      "priorityVector": {
+        "objectiveRelevance": 0,
+        "criticality": 0,
+        "evidenceStrength": 0,
+        "authorizedActionability": 0,
+        "informationGain": 0,
+        "repairValue": 0,
+        "effortCost": 0,
+        "actionRisk": 0
+      },
+      "frontierRef": null,
+      "basePriorityScore": 0,
+      "diagonalDelta": 0,
+      "collectiveScore": 0
+    },
+    {
+      "axisId": "MARKETING_PROOF",
+      "state": "UNKNOWN_MATERIAL",
+      "evidenceState": "UNKNOWN",
+      "horizontalReceiptRefs": [
+        "AUDIT_MD_20261019"
+      ],
+      "exclusionReason": null,
+      "verticalProbe": {
+        "state": "COVERED",
+        "completedDepth": 4,
+        "maximumDepth": 4,
+        "layerReceiptRefs": [
+          "PREVIEW_MARKETING_PROOF_L1",
+          "PREVIEW_MARKETING_PROOF_L2",
+          "PREVIEW_MARKETING_PROOF_L3",
+          "PREVIEW_MARKETING_PROOF_L4"
+        ],
+        "criticalUnknownCount": 1,
+        "deepDivePurpose": "MULTI_APERTURE_FIELD_PROBE"
+      },
+      "priorityVector": {
+        "objectiveRelevance": 3,
+        "criticality": 2,
+        "evidenceStrength": 1,
+        "authorizedActionability": 3,
+        "informationGain": 3,
+        "repairValue": 2,
+        "effortCost": 2,
+        "actionRisk": 1
+      },
+      "frontierRef": "FRONTIER_MARKETING_PROOF",
+      "basePriorityScore": 11,
+      "diagonalDelta": 0,
+      "collectiveScore": 11
+    },
+    {
+      "axisId": "MOBILE_LAYOUT",
+      "state": "STABLE_WITHIN_COVERAGE",
+      "evidenceState": "OBSERVED",
+      "horizontalReceiptRefs": [
+        "AUDIT_MD_20261019"
+      ],
+      "exclusionReason": null,
+      "verticalProbe": {
+        "state": "NOT_REQUIRED",
+        "completedDepth": 0,
+        "maximumDepth": 4,
+        "layerReceiptRefs": [],
+        "criticalUnknownCount": 0,
+        "deepDivePurpose": null
+      },
+      "priorityVector": {
+        "objectiveRelevance": 0,
+        "criticality": 0,
+        "evidenceStrength": 0,
+        "authorizedActionability": 0,
+        "informationGain": 0,
+        "repairValue": 0,
+        "effortCost": 0,
+        "actionRisk": 0
+      },
+      "frontierRef": null,
+      "basePriorityScore": 0,
+      "diagonalDelta": 0,
+      "collectiveScore": 0
+    },
+    {
+      "axisId": "MODEL_AUTHENTICITY",
+      "state": "UNKNOWN_MATERIAL",
+      "evidenceState": "UNKNOWN",
+      "horizontalReceiptRefs": [
+        "AUDIT_MD_20261019"
+      ],
+      "exclusionReason": null,
+      "verticalProbe": {
+        "state": "COVERED",
+        "completedDepth": 4,
+        "maximumDepth": 4,
+        "layerReceiptRefs": [
+          "PREVIEW_MODEL_AUTHENTICITY_L1",
+          "PREVIEW_MODEL_AUTHENTICITY_L2",
+          "PREVIEW_MODEL_AUTHENTICITY_L3",
+          "PREVIEW_MODEL_AUTHENTICITY_L4"
+        ],
+        "criticalUnknownCount": 1,
+        "deepDivePurpose": "MULTI_APERTURE_FIELD_PROBE"
+      },
+      "priorityVector": {
+        "objectiveRelevance": 4,
+        "criticality": 4,
+        "evidenceStrength": 2,
+        "authorizedActionability": 2,
+        "informationGain": 4,
+        "repairValue": 2,
+        "effortCost": 2,
+        "actionRisk": 1
+      },
+      "frontierRef": "FRONTIER_MODEL_AUTHENTICITY",
+      "basePriorityScore": 15,
+      "diagonalDelta": 0,
+      "collectiveScore": 15
+    },
+    {
+      "axisId": "SECURITY_PRIVACY",
+      "state": "STABLE_WITHIN_COVERAGE",
+      "evidenceState": "OBSERVED",
+      "horizontalReceiptRefs": [
+        "AUDIT_MD_20261019"
+      ],
+      "exclusionReason": null,
+      "verticalProbe": {
+        "state": "NOT_REQUIRED",
+        "completedDepth": 0,
+        "maximumDepth": 4,
+        "layerReceiptRefs": [],
+        "criticalUnknownCount": 0,
+        "deepDivePurpose": null
+      },
+      "priorityVector": {
+        "objectiveRelevance": 0,
+        "criticality": 0,
+        "evidenceStrength": 0,
+        "authorizedActionability": 0,
+        "informationGain": 0,
+        "repairValue": 0,
+        "effortCost": 0,
+        "actionRisk": 0
+      },
+      "frontierRef": null,
+      "basePriorityScore": 0,
+      "diagonalDelta": 0,
+      "collectiveScore": 0
+    },
+    {
+      "axisId": "STATE_DATA",
+      "state": "STABLE_WITHIN_COVERAGE",
+      "evidenceState": "OBSERVED",
+      "horizontalReceiptRefs": [
+        "AUDIT_MD_20261019"
+      ],
+      "exclusionReason": null,
+      "verticalProbe": {
+        "state": "NOT_REQUIRED",
+        "completedDepth": 0,
+        "maximumDepth": 4,
+        "layerReceiptRefs": [],
+        "criticalUnknownCount": 0,
+        "deepDivePurpose": null
+      },
+      "priorityVector": {
+        "objectiveRelevance": 0,
+        "criticality": 0,
+        "evidenceStrength": 0,
+        "authorizedActionability": 0,
+        "informationGain": 0,
+        "repairValue": 0,
+        "effortCost": 0,
+        "actionRisk": 0
+      },
+      "frontierRef": null,
+      "basePriorityScore": 0,
+      "diagonalDelta": 0,
+      "collectiveScore": 0
+    },
+    {
+      "axisId": "USER_OUTCOME",
+      "state": "UNKNOWN_MATERIAL",
+      "evidenceState": "UNKNOWN",
+      "horizontalReceiptRefs": [
+        "AUDIT_MD_20261019"
+      ],
+      "exclusionReason": null,
+      "verticalProbe": {
+        "state": "COVERED",
+        "completedDepth": 4,
+        "maximumDepth": 4,
+        "layerReceiptRefs": [
+          "PREVIEW_USER_OUTCOME_L1",
+          "PREVIEW_USER_OUTCOME_L2",
+          "PREVIEW_USER_OUTCOME_L3",
+          "PREVIEW_USER_OUTCOME_L4"
+        ],
+        "criticalUnknownCount": 1,
+        "deepDivePurpose": "MULTI_APERTURE_FIELD_PROBE"
+      },
+      "priorityVector": {
+        "objectiveRelevance": 4,
+        "criticality": 3,
+        "evidenceStrength": 2,
+        "authorizedActionability": 4,
+        "informationGain": 3,
+        "repairValue": 4,
+        "effortCost": 1,
+        "actionRisk": 1
+      },
+      "frontierRef": "FRONTIER_USER_OUTCOME",
+      "basePriorityScore": 18,
+      "diagonalDelta": 0,
+      "collectiveScore": 18
+    }
+  ],
+  "diagonalPairCoverage": {
+    "expectedPairCount": 15,
+    "registeredPairCount": 15,
+    "evaluatedPairCount": 15,
+    "state": "COMPLETE_FOR_MATERIAL_CANDIDATE_GRAPH"
+  },
+  "coverageState": "COMPLETE_FOR_DECLARED_ADAPTER_APERTURE",
+  "prioritySemantics": "ORDINAL_SEARCH_HEURISTIC_NOT_FACT_OR_IMPACT",
+  "computedOutcome": "SELECT_FRONTIER",
+  "selectedAxisId": "DELIVERY_OBSERVABILITY",
+  "selectedFrontierRef": "FRONTIER_DELIVERY_OBSERVABILITY",
+  "nextOperator": "EXTREMUM_NAVIGATION",
+  "decision": {
+    "outcome": "SELECT_FRONTIER",
+    "selectedAxisId": "DELIVERY_OBSERVABILITY",
+    "nextOperator": "EXTREMUM_NAVIGATION",
+    "preservedAxisIds": [
+      "USER_OUTCOME",
+      "INTERFACE",
+      "STATE_DATA",
+      "INTEGRATION",
+      "FAILURE_RECOVERY",
+      "SECURITY_PRIVACY",
+      "ACCESSIBILITY",
+      "DELIVERY_OBSERVABILITY",
+      "MODEL_AUTHENTICITY",
+      "MARKETING_PROOF",
+      "MOBILE_LAYOUT"
+    ],
+    "rationale": "Real-device frame timing can change the mobile release decision; the other five material frontiers remain visible and open."
+  },
+  "authority": {
+    "mode": "LOCAL_READ_ONLY_ANALYSIS",
+    "sourceSystemEffects": 0,
+    "externalNetworkEffects": 0,
+    "mutationAuthorized": false
+  },
+  "recordedAt": "2026-10-19T19:16:30.468Z",
+  "freezeState": "ENTITY_V1_0_0_IMMUTABLE_PROJECT_RECEIPTS_APPEND_SEPARATELY",
+  "claimCeiling": "BOUND_MULTI_APERTURE_NAVIGATION_DECISION_ONLY",
+  "finding": false,
+  "receiptDigest": "sha256:f8063715a3148c8ec981ca92ac24ac68a591711581bd5c6c8fc1488a4029f179"
+}

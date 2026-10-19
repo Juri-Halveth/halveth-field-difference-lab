@@ -5,24 +5,31 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#080b17">
-  <title>HALVETH · Field Difference Lab</title>
+  <title>HALVETH Field Difference Lab · Regeln sichtbar vergleichen</title>
+  <meta name="description" content="Interaktives HALVETH-Labor: vier Modellbahnen, eine verstellbare Feldgrenze und ein synthetischer Softwarevergleich mit sichtbarem Beweisstand.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="HALVETH Field Difference Lab">
+  <meta property="og:description" content="Gleicher Anfang, andere Regel: Feldbahnen und Software-Auswertungen interaktiv vergleichen.">
+  <link rel="canonical" href="https://juri-halveth.github.io/halveth-field-difference-lab/">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <a class="skip" href="#labor">Zum Labor springen</a>
   <main id="labor">
     <header class="hero">
-      <div class="eyebrow"><span class="beacon"></span> HALVETH / LUCINET · FELDLABOR 0.2</div>
+      <div class="eyebrow"><span class="beacon"></span> HALVETH / LUCINET · FELDLABOR 0.2.1</div>
       <h1>FIELD <em>DIFFERENCE</em> LAB</h1>
-      <p class="lead">Gleicher Start. Andere Regel. Beobachte, was sich an einer Feldbahn oder Software-Auswertung ändert — und was der Vergleich tatsächlich aussagt.</p>
-      <div class="hero-meta"><span>4 synchronisierte Welten</span><span>1 Feldgrenze</span><span>1 synthetische Software-Grenze</span><span>offline</span></div>
+      <p class="lead">Vier Bahnen starten gleich und reagieren auf verschiedene Regeln. Verstelle danach eine Feldgrenze und vergleiche, wie dieselbe Software-Eingabe zweimal ausgewertet wird.</p>
+      <div class="hero-meta"><span>4 animierte Modellbahnen</span><span>1 verstellbare Feldgrenze</span><span>1 synthetischer Softwarevergleich</span><span>Berechnung im Browser</span></div>
+      <p class="reality-note"><b>Prüfstand:</b> ausführbare Simulation mit Tests. Der Abgleich mit Messdaten oder einem autorisierten Softwaresystem ist der nächste Forschungszweig.</p>
+      <div class="hero-actions"><a href="#experimente">Experimente öffnen</a><a href="https://github.com/Juri-Halveth/halveth-field-difference-lab">Code und Entwicklung ansehen</a></div>
     </header>
 
-    <section class="control-panel" aria-label="Laborsteuerung">
+    <section id="experimente" class="control-panel" aria-label="Laborsteuerung">
       <div class="tabbar" role="tablist" aria-label="Experiment">
         <button id="tab-worlds" role="tab" aria-selected="true" aria-controls="worlds" type="button">01 / Vier Welten</button>
-        <button id="tab-boundary" role="tab" aria-selected="false" aria-controls="boundary" type="button">02 / Grenze durchqueren</button>
-        <button id="tab-security" role="tab" aria-selected="false" aria-controls="security" type="button">03 / Software-Grenze</button>
+        <button id="tab-boundary" role="tab" aria-selected="false" aria-controls="boundary" tabindex="-1" type="button">02 / Grenze durchqueren</button>
+        <button id="tab-security" role="tab" aria-selected="false" aria-controls="security" tabindex="-1" type="button">03 / Software-Grenze</button>
       </div>
       <div id="transport" class="transport">
         <button id="play" type="button" aria-label="Animation pausieren">Ⅱ <span>Pausieren</span></button>
@@ -33,7 +40,7 @@
     </section>
 
     <section id="security" role="tabpanel" aria-labelledby="tab-security" hidden>
-      <div class="section-head"><p class="kicker">EXPERIMENT 03 · BUG-BOUNTY-ADAPTER</p><h2>Ein Text. Zwei Auswertungen.</h2>
+      <div class="section-head"><p class="kicker">EXPERIMENT 03 · SYNTHETISCHER SECURITY-ADAPTER</p><h2>Ein Text. Zwei Auswertungen.</h2>
         <p>Dieselbe synthetische Eingabe durchläuft zwei ausdrücklich benannte Auswahlregeln. Das Labor zeigt einen Unterschied der Repräsentation. Für einen Sicherheitsbefund müssten danach ein konkreter Verbraucher, eine Berechtigungsentscheidung und eine geschützte Wirkung belegt werden.</p></div>
       <div class="security-workbench">
         <div class="security-editor">
@@ -44,16 +51,16 @@
           <input id="query-key" type="text" maxlength="40" value="color" spellcheck="false" autocomplete="off">
           <div class="examples" aria-label="Beispiele"><button type="button" data-query="color=blue&amp;color=red" data-key="color">Unterschied</button><button type="button" data-query="color=blue&amp;color=blue" data-key="color">Gleich</button><button type="button" data-query="shape=circle" data-key="color">Fehlender Wert</button></div>
           <p class="editor-note">Lokale Modellwerte verwenden. Keine Zugangsdaten, fremden Anfragen oder Fallbeweise hier einfügen.</p>
+          <p id="security-error" class="input-error" role="alert" hidden></p>
         </div>
-        <div class="security-diagram" aria-live="polite">
+        <div class="security-diagram">
           <div class="source-node"><span>QUELLE · CALLER-SUPPLIED</span><code id="source-view"></code></div>
           <div class="rail-pair"><div class="rail first"><span>A / ERSTER WERT</span><strong id="first-value"></strong><small>Operator: URLSearchParams → values[0]</small></div><div class="rail last"><span>B / LETZTER WERT</span><strong id="last-value"></strong><small>Operator: URLSearchParams → values[last]</small></div></div>
-          <div class="delta-node"><span>BEOBACHTETER MODELL-DELTA</span><strong id="security-result"></strong><small id="security-detail"></small></div>
+          <div class="delta-node"><span>BEOBACHTETER MODELL-DELTA</span><strong id="security-result" role="status" aria-live="polite"></strong><small id="security-detail"></small></div>
         </div>
       </div>
       <div class="proof-ladder"><div><b>01</b><span>Lokale Regeldifferenz</span><strong id="gate-local">—</strong></div><div><b>02</b><span>Konkreter Zielpfad</span><strong>OFFEN</strong></div><div><b>03</b><span>Autorisierungswechsel</span><strong>OFFEN</strong></div><div><b>04</b><span>Geschützte Wirkung</span><strong>OFFEN</strong></div></div>
       <div class="security-actions"><p><b>Die Brücke:</b> In der Feldsimulation wechselt eine physikalische Modellregel. Hier wechseln Auswahlregeln über derselben Eingabe. Die gemeinsame Forschungsform ist der kontrollierte Vergleich; Mechanismus und Belegpflicht bleiben domänenspezifisch.</p><button id="export-receipt" type="button">JSON-Prüfprotokoll herunterladen ↓</button></div>
-      <p id="security-error" class="input-error" role="alert" hidden></p>
     </section>
 
     <section id="worlds" role="tabpanel" aria-labelledby="tab-worlds">
@@ -78,7 +85,7 @@
       </div>
     </section>
 
-    <footer class="footnote"><p><b>Leseschlüssel.</b> Feld, Objekt, Anfangszustand, Regel, Grenze und Beobachtung sind hier explizit. Die beiden Experimente haben verschiedene Gleichungen und werden nicht als derselbe physikalische Mechanismus ausgegeben. Bei κ = 1 verschwindet die modellierte Beschleunigung. Vorhandene Geschwindigkeit bleibt erhalten.</p><p>Lokale synthetische Simulation · keine Sensordaten · keine Aussage über Antimaterie, Gravitonium oder reale Antigravitation. <a href="README.md">Modellvertrag und Prüfstand</a> · <a href="https://github.com/Juri-Halveth/halveth-field-difference-lab">Quellcode auf GitHub</a> · Juri Janovski / HALVETH · Apache-2.0</p></footer>
+    <footer class="footnote"><p><b>Leseschlüssel.</b> Feld, Objekt, Anfangszustand, Regel, Grenze und Beobachtung sind hier explizit. Die beiden Feldexperimente haben verschiedene Gleichungen und werden nicht als derselbe physikalische Mechanismus ausgegeben. Bei κ = 1 verschwindet die modellierte Beschleunigung. Vorhandene Geschwindigkeit bleibt erhalten.</p><p>Lokale synthetische Simulation · keine Sensordaten · keine Aussage über Antimaterie, Gravitonium oder reale Antigravitation. <a href="README.md">Modellvertrag</a> · <a href="https://github.com/Juri-Halveth/halveth-field-difference-lab/blob/main/AUDIT_2026-10-19.md">Rückwärts-Audit</a> · <a href="https://github.com/Juri-Halveth/halveth-field-difference-lab">Quellcode auf GitHub</a> · Juri Janovski / HALVETH · Apache-2.0</p></footer>
   </main>
   <script type="module" src="app.js"></script>
 </body>

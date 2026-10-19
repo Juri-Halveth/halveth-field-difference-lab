@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {CENTRAL, BOUNDARY, centralAcceleration, simulateCentral, boundaryStateAt} from './physics.js';
+import {CENTRAL, BOUNDARY, centralAcceleration, simulateCentral, simulateBoundary, boundaryStateAt} from './physics.js';
 
 const near = (a, b, tolerance = 1e-9) => assert.ok(Math.abs(a - b) < tolerance, `${a} != ${b}`);
 
@@ -41,4 +41,14 @@ test('piecewise field crossing preserves position and velocity', () => {
 test('unsupported model inputs fail explicitly', () => {
   assert.throws(() => centralAcceleration([1, 0], Number.NaN), TypeError);
   assert.throws(() => boundaryStateAt(-1), RangeError);
+  assert.throws(() => boundaryStateAt(0, {...BOUNDARY, g: Number.NaN}), TypeError);
+});
+
+test('decimal step ratios preserve one exact final sample', () => {
+  const central = simulateCentral(1, {...CENTRAL, duration: 0.3, dt: 0.1});
+  near(central.at(-1).t, 0.3);
+  assert.equal(central.length, 4);
+  const boundary = simulateBoundary({...BOUNDARY, duration: 0.3}, 0.1);
+  near(boundary.at(-1).t, 0.3);
+  assert.equal(boundary.length, 4);
 });

@@ -1,0 +1,858 @@
+{
+  "schema": "halveth.status-quo-navigation-frame.v1",
+  "logicVersion": "3.5.1",
+  "entityVersion": "1.0.0",
+  "entityState": "STATUS_QUO_FROZEN",
+  "frameId": "FIELD_DIFFERENCE_LAB_AUDIT_20261019_V021",
+  "project": {
+    "domainAdapter": "SOFTWARE_BUILD",
+    "objective": "Reverse audit the visible lab, mobile behavior, runtime, content, authenticity and delivery.",
+    "objectOrReferent": "HALVETH Field Difference Lab 0.2.1 local candidate",
+    "scope": "Owned local source and published 0.2.0 baseline; no third-party target tests",
+    "deliverableType": "PROJECT_AUDIT",
+    "sourceRefs": [
+      "BASE_4C2CF6C",
+      "CANDIDATE_V021",
+      "AUDIT_MD_20261019"
+    ],
+    "acceptedBaselineRef": "BASE_4C2CF6C"
+  },
+  "scanPolicy": {
+    "horizontalMode": "FULL_DECLARED_ADAPTER_APERTURE",
+    "verticalPreviewDepth": 4,
+    "diagonalMode": "COMPLETE_MATERIAL_CANDIDATE_PAIR_GRAPH",
+    "selectiveDrillDepth": 4,
+    "noSelectiveDrillBeforeDiagonal": true,
+    "freezeMode": "VERSIONED_IMMUTABLE_BASELINE"
+  },
+  "axisRegistry": [
+    {
+      "axisId": "USER_OUTCOME",
+      "label": "USER OUTCOME",
+      "definition": "Review user outcome within the Field Difference Lab local candidate.",
+      "layer": "SOFTWARE_BUILD",
+      "scope": "Local 0.2.1 candidate and its public 0.2.0 baseline",
+      "sourceBasisRefs": [
+        "BASE_4C2CF6C",
+        "CANDIDATE_V021",
+        "AUDIT_MD_20261019"
+      ],
+      "statusQuoRef": "BASE_4C2CF6C"
+    },
+    {
+      "axisId": "INTERFACE",
+      "label": "INTERFACE",
+      "definition": "Review interface within the Field Difference Lab local candidate.",
+      "layer": "SOFTWARE_BUILD",
+      "scope": "Local 0.2.1 candidate and its public 0.2.0 baseline",
+      "sourceBasisRefs": [
+        "BASE_4C2CF6C",
+        "CANDIDATE_V021",
+        "AUDIT_MD_20261019"
+      ],
+      "statusQuoRef": "BASE_4C2CF6C"
+    },
+    {
+      "axisId": "STATE_DATA",
+      "label": "STATE DATA",
+      "definition": "Review state data within the Field Difference Lab local candidate.",
+      "layer": "SOFTWARE_BUILD",
+      "scope": "Local 0.2.1 candidate and its public 0.2.0 baseline",
+      "sourceBasisRefs": [
+        "BASE_4C2CF6C",
+        "CANDIDATE_V021",
+        "AUDIT_MD_20261019"
+      ],
+      "statusQuoRef": "BASE_4C2CF6C"
+    },
+    {
+      "axisId": "INTEGRATION",
+      "label": "INTEGRATION",
+      "definition": "Review integration within the Field Difference Lab local candidate.",
+      "layer": "SOFTWARE_BUILD",
+      "scope": "Local 0.2.1 candidate and its public 0.2.0 baseline",
+      "sourceBasisRefs": [
+        "BASE_4C2CF6C",
+        "CANDIDATE_V021",
+        "AUDIT_MD_20261019"
+      ],
+      "statusQuoRef": "BASE_4C2CF6C"
+    },
+    {
+      "axisId": "FAILURE_RECOVERY",
+      "label": "FAILURE RECOVERY",
+      "definition": "Review failure recovery within the Field Difference Lab local candidate.",
+      "layer": "SOFTWARE_BUILD",
+      "scope": "Local 0.2.1 candidate and its public 0.2.0 baseline",
+      "sourceBasisRefs": [
+        "BASE_4C2CF6C",
+        "CANDIDATE_V021",
+        "AUDIT_MD_20261019"
+      ],
+      "statusQuoRef": "BASE_4C2CF6C"
+    },
+    {
+      "axisId": "SECURITY_PRIVACY",
+      "label": "SECURITY PRIVACY",
+      "definition": "Review security privacy within the Field Difference Lab local candidate.",
+      "layer": "SOFTWARE_BUILD",
+      "scope": "Local 0.2.1 candidate and its public 0.2.0 baseline",
+      "sourceBasisRefs": [
+        "BASE_4C2CF6C",
+        "CANDIDATE_V021",
+        "AUDIT_MD_20261019"
+      ],
+      "statusQuoRef": "BASE_4C2CF6C"
+    },
+    {
+      "axisId": "ACCESSIBILITY",
+      "label": "ACCESSIBILITY",
+      "definition": "Review accessibility within the Field Difference Lab local candidate.",
+      "layer": "SOFTWARE_BUILD",
+      "scope": "Local 0.2.1 candidate and its public 0.2.0 baseline",
+      "sourceBasisRefs": [
+        "BASE_4C2CF6C",
+        "CANDIDATE_V021",
+        "AUDIT_MD_20261019"
+      ],
+      "statusQuoRef": "BASE_4C2CF6C"
+    },
+    {
+      "axisId": "DELIVERY_OBSERVABILITY",
+      "label": "DELIVERY OBSERVABILITY",
+      "definition": "Review delivery observability within the Field Difference Lab local candidate.",
+      "layer": "SOFTWARE_BUILD",
+      "scope": "Local 0.2.1 candidate and its public 0.2.0 baseline",
+      "sourceBasisRefs": [
+        "BASE_4C2CF6C",
+        "CANDIDATE_V021",
+        "AUDIT_MD_20261019"
+      ],
+      "statusQuoRef": "BASE_4C2CF6C"
+    },
+    {
+      "axisId": "MODEL_AUTHENTICITY",
+      "label": "MODEL AUTHENTICITY",
+      "definition": "Review model authenticity within the Field Difference Lab local candidate.",
+      "layer": "PROJECT_EXTENSION",
+      "scope": "Local 0.2.1 candidate and its public 0.2.0 baseline",
+      "sourceBasisRefs": [
+        "BASE_4C2CF6C",
+        "CANDIDATE_V021",
+        "AUDIT_MD_20261019"
+      ],
+      "statusQuoRef": "BASE_4C2CF6C"
+    },
+    {
+      "axisId": "MARKETING_PROOF",
+      "label": "MARKETING PROOF",
+      "definition": "Review marketing proof within the Field Difference Lab local candidate.",
+      "layer": "PROJECT_EXTENSION",
+      "scope": "Local 0.2.1 candidate and its public 0.2.0 baseline",
+      "sourceBasisRefs": [
+        "BASE_4C2CF6C",
+        "CANDIDATE_V021",
+        "AUDIT_MD_20261019"
+      ],
+      "statusQuoRef": "BASE_4C2CF6C"
+    },
+    {
+      "axisId": "MOBILE_LAYOUT",
+      "label": "MOBILE LAYOUT",
+      "definition": "Review mobile layout within the Field Difference Lab local candidate.",
+      "layer": "PROJECT_EXTENSION",
+      "scope": "Local 0.2.1 candidate and its public 0.2.0 baseline",
+      "sourceBasisRefs": [
+        "BASE_4C2CF6C",
+        "CANDIDATE_V021",
+        "AUDIT_MD_20261019"
+      ],
+      "statusQuoRef": "BASE_4C2CF6C"
+    }
+  ],
+  "axisEvaluations": [
+    {
+      "axisId": "USER_OUTCOME",
+      "state": "UNKNOWN_MATERIAL",
+      "evidenceState": "UNKNOWN",
+      "horizontalReceiptRefs": [
+        "AUDIT_MD_20261019"
+      ],
+      "exclusionReason": null,
+      "verticalProbe": {
+        "state": "COVERED",
+        "completedDepth": 4,
+        "maximumDepth": 4,
+        "layerReceiptRefs": [
+          "PREVIEW_USER_OUTCOME_L1",
+          "PREVIEW_USER_OUTCOME_L2",
+          "PREVIEW_USER_OUTCOME_L3",
+          "PREVIEW_USER_OUTCOME_L4"
+        ],
+        "criticalUnknownCount": 1,
+        "deepDivePurpose": "MULTI_APERTURE_FIELD_PROBE"
+      },
+      "priorityVector": {
+        "objectiveRelevance": 4,
+        "criticality": 3,
+        "evidenceStrength": 2,
+        "authorizedActionability": 4,
+        "informationGain": 3,
+        "repairValue": 4,
+        "effortCost": 1,
+        "actionRisk": 1
+      },
+      "frontierRef": "FRONTIER_USER_OUTCOME"
+    },
+    {
+      "axisId": "INTERFACE",
+      "state": "STABLE_WITHIN_COVERAGE",
+      "evidenceState": "OBSERVED",
+      "horizontalReceiptRefs": [
+        "AUDIT_MD_20261019"
+      ],
+      "exclusionReason": null,
+      "verticalProbe": {
+        "state": "NOT_REQUIRED",
+        "completedDepth": 0,
+        "maximumDepth": 4,
+        "layerReceiptRefs": [],
+        "criticalUnknownCount": 0,
+        "deepDivePurpose": null
+      },
+      "priorityVector": {
+        "objectiveRelevance": 0,
+        "criticality": 0,
+        "evidenceStrength": 0,
+        "authorizedActionability": 0,
+        "informationGain": 0,
+        "repairValue": 0,
+        "effortCost": 0,
+        "actionRisk": 0
+      },
+      "frontierRef": null
+    },
+    {
+      "axisId": "STATE_DATA",
+      "state": "STABLE_WITHIN_COVERAGE",
+      "evidenceState": "OBSERVED",
+      "horizontalReceiptRefs": [
+        "AUDIT_MD_20261019"
+      ],
+      "exclusionReason": null,
+      "verticalProbe": {
+        "state": "NOT_REQUIRED",
+        "completedDepth": 0,
+        "maximumDepth": 4,
+        "layerReceiptRefs": [],
+        "criticalUnknownCount": 0,
+        "deepDivePurpose": null
+      },
+      "priorityVector": {
+        "objectiveRelevance": 0,
+        "criticality": 0,
+        "evidenceStrength": 0,
+        "authorizedActionability": 0,
+        "informationGain": 0,
+        "repairValue": 0,
+        "effortCost": 0,
+        "actionRisk": 0
+      },
+      "frontierRef": null
+    },
+    {
+      "axisId": "INTEGRATION",
+      "state": "UNKNOWN_MATERIAL",
+      "evidenceState": "UNKNOWN",
+      "horizontalReceiptRefs": [
+        "AUDIT_MD_20261019"
+      ],
+      "exclusionReason": null,
+      "verticalProbe": {
+        "state": "COVERED",
+        "completedDepth": 4,
+        "maximumDepth": 4,
+        "layerReceiptRefs": [
+          "PREVIEW_INTEGRATION_L1",
+          "PREVIEW_INTEGRATION_L2",
+          "PREVIEW_INTEGRATION_L3",
+          "PREVIEW_INTEGRATION_L4"
+        ],
+        "criticalUnknownCount": 1,
+        "deepDivePurpose": "MULTI_APERTURE_FIELD_PROBE"
+      },
+      "priorityVector": {
+        "objectiveRelevance": 3,
+        "criticality": 4,
+        "evidenceStrength": 1,
+        "authorizedActionability": 1,
+        "informationGain": 3,
+        "repairValue": 1,
+        "effortCost": 4,
+        "actionRisk": 3
+      },
+      "frontierRef": "FRONTIER_INTEGRATION"
+    },
+    {
+      "axisId": "FAILURE_RECOVERY",
+      "state": "STABLE_WITHIN_COVERAGE",
+      "evidenceState": "OBSERVED",
+      "horizontalReceiptRefs": [
+        "AUDIT_MD_20261019"
+      ],
+      "exclusionReason": null,
+      "verticalProbe": {
+        "state": "NOT_REQUIRED",
+        "completedDepth": 0,
+        "maximumDepth": 4,
+        "layerReceiptRefs": [],
+        "criticalUnknownCount": 0,
+        "deepDivePurpose": null
+      },
+      "priorityVector": {
+        "objectiveRelevance": 0,
+        "criticality": 0,
+        "evidenceStrength": 0,
+        "authorizedActionability": 0,
+        "informationGain": 0,
+        "repairValue": 0,
+        "effortCost": 0,
+        "actionRisk": 0
+      },
+      "frontierRef": null
+    },
+    {
+      "axisId": "SECURITY_PRIVACY",
+      "state": "STABLE_WITHIN_COVERAGE",
+      "evidenceState": "OBSERVED",
+      "horizontalReceiptRefs": [
+        "AUDIT_MD_20261019"
+      ],
+      "exclusionReason": null,
+      "verticalProbe": {
+        "state": "NOT_REQUIRED",
+        "completedDepth": 0,
+        "maximumDepth": 4,
+        "layerReceiptRefs": [],
+        "criticalUnknownCount": 0,
+        "deepDivePurpose": null
+      },
+      "priorityVector": {
+        "objectiveRelevance": 0,
+        "criticality": 0,
+        "evidenceStrength": 0,
+        "authorizedActionability": 0,
+        "informationGain": 0,
+        "repairValue": 0,
+        "effortCost": 0,
+        "actionRisk": 0
+      },
+      "frontierRef": null
+    },
+    {
+      "axisId": "ACCESSIBILITY",
+      "state": "UNKNOWN_MATERIAL",
+      "evidenceState": "UNKNOWN",
+      "horizontalReceiptRefs": [
+        "AUDIT_MD_20261019"
+      ],
+      "exclusionReason": null,
+      "verticalProbe": {
+        "state": "COVERED",
+        "completedDepth": 4,
+        "maximumDepth": 4,
+        "layerReceiptRefs": [
+          "PREVIEW_ACCESSIBILITY_L1",
+          "PREVIEW_ACCESSIBILITY_L2",
+          "PREVIEW_ACCESSIBILITY_L3",
+          "PREVIEW_ACCESSIBILITY_L4"
+        ],
+        "criticalUnknownCount": 1,
+        "deepDivePurpose": "MULTI_APERTURE_FIELD_PROBE"
+      },
+      "priorityVector": {
+        "objectiveRelevance": 4,
+        "criticality": 3,
+        "evidenceStrength": 2,
+        "authorizedActionability": 4,
+        "informationGain": 3,
+        "repairValue": 3,
+        "effortCost": 2,
+        "actionRisk": 1
+      },
+      "frontierRef": "FRONTIER_ACCESSIBILITY"
+    },
+    {
+      "axisId": "DELIVERY_OBSERVABILITY",
+      "state": "UNKNOWN_MATERIAL",
+      "evidenceState": "UNKNOWN",
+      "horizontalReceiptRefs": [
+        "AUDIT_MD_20261019"
+      ],
+      "exclusionReason": null,
+      "verticalProbe": {
+        "state": "COVERED",
+        "completedDepth": 4,
+        "maximumDepth": 4,
+        "layerReceiptRefs": [
+          "PREVIEW_DELIVERY_OBSERVABILITY_L1",
+          "PREVIEW_DELIVERY_OBSERVABILITY_L2",
+          "PREVIEW_DELIVERY_OBSERVABILITY_L3",
+          "PREVIEW_DELIVERY_OBSERVABILITY_L4"
+        ],
+        "criticalUnknownCount": 1,
+        "deepDivePurpose": "MULTI_APERTURE_FIELD_PROBE"
+      },
+      "priorityVector": {
+        "objectiveRelevance": 4,
+        "criticality": 4,
+        "evidenceStrength": 3,
+        "authorizedActionability": 4,
+        "informationGain": 4,
+        "repairValue": 4,
+        "effortCost": 1,
+        "actionRisk": 1
+      },
+      "frontierRef": "FRONTIER_DELIVERY_OBSERVABILITY"
+    },
+    {
+      "axisId": "MODEL_AUTHENTICITY",
+      "state": "UNKNOWN_MATERIAL",
+      "evidenceState": "UNKNOWN",
+      "horizontalReceiptRefs": [
+        "AUDIT_MD_20261019"
+      ],
+      "exclusionReason": null,
+      "verticalProbe": {
+        "state": "COVERED",
+        "completedDepth": 4,
+        "maximumDepth": 4,
+        "layerReceiptRefs": [
+          "PREVIEW_MODEL_AUTHENTICITY_L1",
+          "PREVIEW_MODEL_AUTHENTICITY_L2",
+          "PREVIEW_MODEL_AUTHENTICITY_L3",
+          "PREVIEW_MODEL_AUTHENTICITY_L4"
+        ],
+        "criticalUnknownCount": 1,
+        "deepDivePurpose": "MULTI_APERTURE_FIELD_PROBE"
+      },
+      "priorityVector": {
+        "objectiveRelevance": 4,
+        "criticality": 4,
+        "evidenceStrength": 2,
+        "authorizedActionability": 2,
+        "informationGain": 4,
+        "repairValue": 2,
+        "effortCost": 2,
+        "actionRisk": 1
+      },
+      "frontierRef": "FRONTIER_MODEL_AUTHENTICITY"
+    },
+    {
+      "axisId": "MARKETING_PROOF",
+      "state": "UNKNOWN_MATERIAL",
+      "evidenceState": "UNKNOWN",
+      "horizontalReceiptRefs": [
+        "AUDIT_MD_20261019"
+      ],
+      "exclusionReason": null,
+      "verticalProbe": {
+        "state": "COVERED",
+        "completedDepth": 4,
+        "maximumDepth": 4,
+        "layerReceiptRefs": [
+          "PREVIEW_MARKETING_PROOF_L1",
+          "PREVIEW_MARKETING_PROOF_L2",
+          "PREVIEW_MARKETING_PROOF_L3",
+          "PREVIEW_MARKETING_PROOF_L4"
+        ],
+        "criticalUnknownCount": 1,
+        "deepDivePurpose": "MULTI_APERTURE_FIELD_PROBE"
+      },
+      "priorityVector": {
+        "objectiveRelevance": 3,
+        "criticality": 2,
+        "evidenceStrength": 1,
+        "authorizedActionability": 3,
+        "informationGain": 3,
+        "repairValue": 2,
+        "effortCost": 2,
+        "actionRisk": 1
+      },
+      "frontierRef": "FRONTIER_MARKETING_PROOF"
+    },
+    {
+      "axisId": "MOBILE_LAYOUT",
+      "state": "STABLE_WITHIN_COVERAGE",
+      "evidenceState": "OBSERVED",
+      "horizontalReceiptRefs": [
+        "AUDIT_MD_20261019"
+      ],
+      "exclusionReason": null,
+      "verticalProbe": {
+        "state": "NOT_REQUIRED",
+        "completedDepth": 0,
+        "maximumDepth": 4,
+        "layerReceiptRefs": [],
+        "criticalUnknownCount": 0,
+        "deepDivePurpose": null
+      },
+      "priorityVector": {
+        "objectiveRelevance": 0,
+        "criticality": 0,
+        "evidenceStrength": 0,
+        "authorizedActionability": 0,
+        "informationGain": 0,
+        "repairValue": 0,
+        "effortCost": 0,
+        "actionRisk": 0
+      },
+      "frontierRef": null
+    }
+  ],
+  "diagonalRegistry": [
+    {
+      "edgeId": "PAIR_ACCESSIBILITY__DELIVERY_OBSERVABILITY",
+      "leftAxisId": "ACCESSIBILITY",
+      "rightAxisId": "DELIVERY_OBSERVABILITY",
+      "comparisonQuestion": "Compare ACCESSIBILITY and DELIVERY_OBSERVABILITY against the same candidate: does evidence overlap change search order?",
+      "relationType": "COLLECTIVE_SEARCH_RELATION_CANDIDATE",
+      "sourceBasisRefs": [
+        "AUDIT_MD_20261019"
+      ]
+    },
+    {
+      "edgeId": "PAIR_ACCESSIBILITY__INTEGRATION",
+      "leftAxisId": "ACCESSIBILITY",
+      "rightAxisId": "INTEGRATION",
+      "comparisonQuestion": "Compare ACCESSIBILITY and INTEGRATION against the same candidate: does evidence overlap change search order?",
+      "relationType": "COLLECTIVE_SEARCH_RELATION_CANDIDATE",
+      "sourceBasisRefs": [
+        "AUDIT_MD_20261019"
+      ]
+    },
+    {
+      "edgeId": "PAIR_ACCESSIBILITY__MARKETING_PROOF",
+      "leftAxisId": "ACCESSIBILITY",
+      "rightAxisId": "MARKETING_PROOF",
+      "comparisonQuestion": "Compare ACCESSIBILITY and MARKETING_PROOF against the same candidate: does evidence overlap change search order?",
+      "relationType": "COLLECTIVE_SEARCH_RELATION_CANDIDATE",
+      "sourceBasisRefs": [
+        "AUDIT_MD_20261019"
+      ]
+    },
+    {
+      "edgeId": "PAIR_ACCESSIBILITY__MODEL_AUTHENTICITY",
+      "leftAxisId": "ACCESSIBILITY",
+      "rightAxisId": "MODEL_AUTHENTICITY",
+      "comparisonQuestion": "Compare ACCESSIBILITY and MODEL_AUTHENTICITY against the same candidate: does evidence overlap change search order?",
+      "relationType": "COLLECTIVE_SEARCH_RELATION_CANDIDATE",
+      "sourceBasisRefs": [
+        "AUDIT_MD_20261019"
+      ]
+    },
+    {
+      "edgeId": "PAIR_ACCESSIBILITY__USER_OUTCOME",
+      "leftAxisId": "ACCESSIBILITY",
+      "rightAxisId": "USER_OUTCOME",
+      "comparisonQuestion": "Compare ACCESSIBILITY and USER_OUTCOME against the same candidate: does evidence overlap change search order?",
+      "relationType": "COLLECTIVE_SEARCH_RELATION_CANDIDATE",
+      "sourceBasisRefs": [
+        "AUDIT_MD_20261019"
+      ]
+    },
+    {
+      "edgeId": "PAIR_DELIVERY_OBSERVABILITY__INTEGRATION",
+      "leftAxisId": "DELIVERY_OBSERVABILITY",
+      "rightAxisId": "INTEGRATION",
+      "comparisonQuestion": "Compare DELIVERY_OBSERVABILITY and INTEGRATION against the same candidate: does evidence overlap change search order?",
+      "relationType": "COLLECTIVE_SEARCH_RELATION_CANDIDATE",
+      "sourceBasisRefs": [
+        "AUDIT_MD_20261019"
+      ]
+    },
+    {
+      "edgeId": "PAIR_DELIVERY_OBSERVABILITY__MARKETING_PROOF",
+      "leftAxisId": "DELIVERY_OBSERVABILITY",
+      "rightAxisId": "MARKETING_PROOF",
+      "comparisonQuestion": "Compare DELIVERY_OBSERVABILITY and MARKETING_PROOF against the same candidate: does evidence overlap change search order?",
+      "relationType": "COLLECTIVE_SEARCH_RELATION_CANDIDATE",
+      "sourceBasisRefs": [
+        "AUDIT_MD_20261019"
+      ]
+    },
+    {
+      "edgeId": "PAIR_DELIVERY_OBSERVABILITY__MODEL_AUTHENTICITY",
+      "leftAxisId": "DELIVERY_OBSERVABILITY",
+      "rightAxisId": "MODEL_AUTHENTICITY",
+      "comparisonQuestion": "Compare DELIVERY_OBSERVABILITY and MODEL_AUTHENTICITY against the same candidate: does evidence overlap change search order?",
+      "relationType": "COLLECTIVE_SEARCH_RELATION_CANDIDATE",
+      "sourceBasisRefs": [
+        "AUDIT_MD_20261019"
+      ]
+    },
+    {
+      "edgeId": "PAIR_DELIVERY_OBSERVABILITY__USER_OUTCOME",
+      "leftAxisId": "DELIVERY_OBSERVABILITY",
+      "rightAxisId": "USER_OUTCOME",
+      "comparisonQuestion": "Compare DELIVERY_OBSERVABILITY and USER_OUTCOME against the same candidate: does evidence overlap change search order?",
+      "relationType": "COLLECTIVE_SEARCH_RELATION_CANDIDATE",
+      "sourceBasisRefs": [
+        "AUDIT_MD_20261019"
+      ]
+    },
+    {
+      "edgeId": "PAIR_INTEGRATION__MARKETING_PROOF",
+      "leftAxisId": "INTEGRATION",
+      "rightAxisId": "MARKETING_PROOF",
+      "comparisonQuestion": "Compare INTEGRATION and MARKETING_PROOF against the same candidate: does evidence overlap change search order?",
+      "relationType": "COLLECTIVE_SEARCH_RELATION_CANDIDATE",
+      "sourceBasisRefs": [
+        "AUDIT_MD_20261019"
+      ]
+    },
+    {
+      "edgeId": "PAIR_INTEGRATION__MODEL_AUTHENTICITY",
+      "leftAxisId": "INTEGRATION",
+      "rightAxisId": "MODEL_AUTHENTICITY",
+      "comparisonQuestion": "Compare INTEGRATION and MODEL_AUTHENTICITY against the same candidate: does evidence overlap change search order?",
+      "relationType": "COLLECTIVE_SEARCH_RELATION_CANDIDATE",
+      "sourceBasisRefs": [
+        "AUDIT_MD_20261019"
+      ]
+    },
+    {
+      "edgeId": "PAIR_INTEGRATION__USER_OUTCOME",
+      "leftAxisId": "INTEGRATION",
+      "rightAxisId": "USER_OUTCOME",
+      "comparisonQuestion": "Compare INTEGRATION and USER_OUTCOME against the same candidate: does evidence overlap change search order?",
+      "relationType": "COLLECTIVE_SEARCH_RELATION_CANDIDATE",
+      "sourceBasisRefs": [
+        "AUDIT_MD_20261019"
+      ]
+    },
+    {
+      "edgeId": "PAIR_MARKETING_PROOF__MODEL_AUTHENTICITY",
+      "leftAxisId": "MARKETING_PROOF",
+      "rightAxisId": "MODEL_AUTHENTICITY",
+      "comparisonQuestion": "Compare MARKETING_PROOF and MODEL_AUTHENTICITY against the same candidate: does evidence overlap change search order?",
+      "relationType": "COLLECTIVE_SEARCH_RELATION_CANDIDATE",
+      "sourceBasisRefs": [
+        "AUDIT_MD_20261019"
+      ]
+    },
+    {
+      "edgeId": "PAIR_MARKETING_PROOF__USER_OUTCOME",
+      "leftAxisId": "MARKETING_PROOF",
+      "rightAxisId": "USER_OUTCOME",
+      "comparisonQuestion": "Compare MARKETING_PROOF and USER_OUTCOME against the same candidate: does evidence overlap change search order?",
+      "relationType": "COLLECTIVE_SEARCH_RELATION_CANDIDATE",
+      "sourceBasisRefs": [
+        "AUDIT_MD_20261019"
+      ]
+    },
+    {
+      "edgeId": "PAIR_MODEL_AUTHENTICITY__USER_OUTCOME",
+      "leftAxisId": "MODEL_AUTHENTICITY",
+      "rightAxisId": "USER_OUTCOME",
+      "comparisonQuestion": "Compare MODEL_AUTHENTICITY and USER_OUTCOME against the same candidate: does evidence overlap change search order?",
+      "relationType": "COLLECTIVE_SEARCH_RELATION_CANDIDATE",
+      "sourceBasisRefs": [
+        "AUDIT_MD_20261019"
+      ]
+    }
+  ],
+  "diagonalEvaluations": [
+    {
+      "edgeId": "PAIR_ACCESSIBILITY__DELIVERY_OBSERVABILITY",
+      "state": "EVALUATED",
+      "evidenceState": "INFERRED",
+      "evidenceRefs": [
+        "AUDIT_MD_20261019"
+      ],
+      "leftDelta": 0,
+      "rightDelta": 0,
+      "exclusionReason": null
+    },
+    {
+      "edgeId": "PAIR_ACCESSIBILITY__INTEGRATION",
+      "state": "EVALUATED",
+      "evidenceState": "INFERRED",
+      "evidenceRefs": [
+        "AUDIT_MD_20261019"
+      ],
+      "leftDelta": 0,
+      "rightDelta": 0,
+      "exclusionReason": null
+    },
+    {
+      "edgeId": "PAIR_ACCESSIBILITY__MARKETING_PROOF",
+      "state": "EVALUATED",
+      "evidenceState": "INFERRED",
+      "evidenceRefs": [
+        "AUDIT_MD_20261019"
+      ],
+      "leftDelta": 0,
+      "rightDelta": 0,
+      "exclusionReason": null
+    },
+    {
+      "edgeId": "PAIR_ACCESSIBILITY__MODEL_AUTHENTICITY",
+      "state": "EVALUATED",
+      "evidenceState": "INFERRED",
+      "evidenceRefs": [
+        "AUDIT_MD_20261019"
+      ],
+      "leftDelta": 0,
+      "rightDelta": 0,
+      "exclusionReason": null
+    },
+    {
+      "edgeId": "PAIR_ACCESSIBILITY__USER_OUTCOME",
+      "state": "EVALUATED",
+      "evidenceState": "INFERRED",
+      "evidenceRefs": [
+        "AUDIT_MD_20261019"
+      ],
+      "leftDelta": 0,
+      "rightDelta": 0,
+      "exclusionReason": null
+    },
+    {
+      "edgeId": "PAIR_DELIVERY_OBSERVABILITY__INTEGRATION",
+      "state": "EVALUATED",
+      "evidenceState": "INFERRED",
+      "evidenceRefs": [
+        "AUDIT_MD_20261019"
+      ],
+      "leftDelta": 0,
+      "rightDelta": 0,
+      "exclusionReason": null
+    },
+    {
+      "edgeId": "PAIR_DELIVERY_OBSERVABILITY__MARKETING_PROOF",
+      "state": "EVALUATED",
+      "evidenceState": "INFERRED",
+      "evidenceRefs": [
+        "AUDIT_MD_20261019"
+      ],
+      "leftDelta": 0,
+      "rightDelta": 0,
+      "exclusionReason": null
+    },
+    {
+      "edgeId": "PAIR_DELIVERY_OBSERVABILITY__MODEL_AUTHENTICITY",
+      "state": "EVALUATED",
+      "evidenceState": "INFERRED",
+      "evidenceRefs": [
+        "AUDIT_MD_20261019"
+      ],
+      "leftDelta": 0,
+      "rightDelta": 0,
+      "exclusionReason": null
+    },
+    {
+      "edgeId": "PAIR_DELIVERY_OBSERVABILITY__USER_OUTCOME",
+      "state": "EVALUATED",
+      "evidenceState": "INFERRED",
+      "evidenceRefs": [
+        "AUDIT_MD_20261019"
+      ],
+      "leftDelta": 0,
+      "rightDelta": 0,
+      "exclusionReason": null
+    },
+    {
+      "edgeId": "PAIR_INTEGRATION__MARKETING_PROOF",
+      "state": "EVALUATED",
+      "evidenceState": "INFERRED",
+      "evidenceRefs": [
+        "AUDIT_MD_20261019"
+      ],
+      "leftDelta": 0,
+      "rightDelta": 0,
+      "exclusionReason": null
+    },
+    {
+      "edgeId": "PAIR_INTEGRATION__MODEL_AUTHENTICITY",
+      "state": "EVALUATED",
+      "evidenceState": "INFERRED",
+      "evidenceRefs": [
+        "AUDIT_MD_20261019"
+      ],
+      "leftDelta": 0,
+      "rightDelta": 0,
+      "exclusionReason": null
+    },
+    {
+      "edgeId": "PAIR_INTEGRATION__USER_OUTCOME",
+      "state": "EVALUATED",
+      "evidenceState": "INFERRED",
+      "evidenceRefs": [
+        "AUDIT_MD_20261019"
+      ],
+      "leftDelta": 0,
+      "rightDelta": 0,
+      "exclusionReason": null
+    },
+    {
+      "edgeId": "PAIR_MARKETING_PROOF__MODEL_AUTHENTICITY",
+      "state": "EVALUATED",
+      "evidenceState": "INFERRED",
+      "evidenceRefs": [
+        "AUDIT_MD_20261019"
+      ],
+      "leftDelta": 0,
+      "rightDelta": 0,
+      "exclusionReason": null
+    },
+    {
+      "edgeId": "PAIR_MARKETING_PROOF__USER_OUTCOME",
+      "state": "EVALUATED",
+      "evidenceState": "INFERRED",
+      "evidenceRefs": [
+        "AUDIT_MD_20261019"
+      ],
+      "leftDelta": 0,
+      "rightDelta": 0,
+      "exclusionReason": null
+    },
+    {
+      "edgeId": "PAIR_MODEL_AUTHENTICITY__USER_OUTCOME",
+      "state": "EVALUATED",
+      "evidenceState": "INFERRED",
+      "evidenceRefs": [
+        "AUDIT_MD_20261019"
+      ],
+      "leftDelta": 0,
+      "rightDelta": 0,
+      "exclusionReason": null
+    }
+  ],
+  "decision": {
+    "outcome": "SELECT_FRONTIER",
+    "selectedAxisId": "DELIVERY_OBSERVABILITY",
+    "nextOperator": "EXTREMUM_NAVIGATION",
+    "preservedAxisIds": [
+      "USER_OUTCOME",
+      "INTERFACE",
+      "STATE_DATA",
+      "INTEGRATION",
+      "FAILURE_RECOVERY",
+      "SECURITY_PRIVACY",
+      "ACCESSIBILITY",
+      "DELIVERY_OBSERVABILITY",
+      "MODEL_AUTHENTICITY",
+      "MARKETING_PROOF",
+      "MOBILE_LAYOUT"
+    ],
+    "rationale": "Real-device frame timing can change the mobile release decision; the other five material frontiers remain visible and open."
+  },
+  "authority": {
+    "mode": "LOCAL_READ_ONLY_ANALYSIS",
+    "sourceSystemEffects": 0,
+    "externalNetworkEffects": 0,
+    "mutationAuthorized": false
+  },
+  "recordedAt": "2026-10-19T19:16:30.468Z"
+}

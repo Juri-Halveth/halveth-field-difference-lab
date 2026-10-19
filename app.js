@@ -22,11 +22,15 @@ const boundaryMetrics = document.querySelector('#boundary-metrics');
 const queryInput = document.querySelector('#query-input');
 const queryKey = document.querySelector('#query-key');
 const securityError = document.querySelector('#security-error');
+const exportButton = document.querySelector('#export-receipt');
 let currentSecurityReceipt = null;
 let activeTab = 'worlds';
 let fraction = 0;
-let playing = !matchMedia('(prefers-reduced-motion: reduce)').matches;
+const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+let playing = !reducedMotion.matches;
 let lastFrame = 0;
+let accumulatedMs = 0;
+let frameHandle = 0;
 let boundaryOptions = {...BOUNDARY};
 let boundaryPath = simulateBoundary(boundaryOptions);
 
@@ -148,6 +152,8 @@ function renderSecurity() {
     const receipt = evaluateSyntheticQuery(queryInput.value, queryKey.value);
     currentSecurityReceipt = receipt;
     securityError.hidden = true;
+    queryKey.removeAttribute('aria-invalid');
+    exportButton.disabled = false;
     document.querySelector('#source-view').textContent = receipt.source.raw || '(leer)';
     document.querySelector('#first-value').textContent = receipt.left.value ?? 'UNBEKANNT';
     document.querySelector('#last-value').textContent = receipt.right.value ?? 'UNBEKANNT';
@@ -160,8 +166,19 @@ function renderSecurity() {
     document.querySelector('#security-detail').textContent = `${receipt.values.length} Wert(e) für „${receipt.source.key}“ · Wirkung auf ein reales System: offen`;
     document.querySelector('#gate-local').textContent = receipt.result === 'DIVERGENT_SELECTION' ? 'GEZEIGT' : receipt.result === 'UNKNOWN_MISSING_KEY' ? 'UNBEKANNT' : 'KEIN DELTA';
   } catch (error) {
+    if (!(error instanceof RangeError || error instanceof TypeError)) throw error;
     currentSecurityReceipt = null;
-    securityError.textContent = `Eingabe im lokalen Modell ungültig: ${error.message}`;
+    queryKey.setAttribute('aria-invalid', 'true');
+    exportButton.disabled = true;
+    document.querySelector('#source-view').textContent = queryInput.value || '(leer)';
+    document.querySelector('#first-value').textContent = '—';
+    document.querySelector('#last-value').textContent = '—';
+    document.querySelector('#security-result').textContent = '? · EINGABE PRÜFEN';
+    document.querySelector('#security-detail').textContent = 'Für diese Eingabe liegt kein Modellresultat vor.';
+    document.querySelector('#gate-local').textContent = 'UNBEKANNT';
+    securityError.textContent = queryKey.value.length === 0 ?
+      'Bitte einen Vergleichsschlüssel eingeben.' :
+      'Die Eingabe liegt außerhalb der Grenzen dieses lokalen Modells.';
     securityError.hidden = false;
   }
 }
@@ -182,21 +199,39 @@ function updatePlayLabel() {
 function selectTab(tab) {
   activeTab = tab;
   fraction = 0;
-  if (tab === 'security') {playing = false; updatePlayLabel();}
+  if (tab === 'security') {playing = false; stopAnimation(); updatePlayLabel();}
   document.querySelector('#transport').hidden = tab === 'security';
   for (const id of ['worlds', 'boundary', 'security']) {
     document.querySelector(`#${id}`).hidden = tab !== id;
-    document.querySelector(`#tab-${id}`).setAttribute('aria-selected', String(id === tab));
+    const button = document.querySelector(`#tab-${id}`);
+    button.setAttribute('aria-selected', String(id === tab));
+    button.tabIndex = id === tab ? 0 : -1;
   }
   render();
+  scheduleAnimation();
 }
 
 document.querySelector('#tab-worlds').addEventListener('click', () => selectTab('worlds'));
 document.querySelector('#tab-boundary').addEventListener('click', () => selectTab('boundary'));
 document.querySelector('#tab-security').addEventListener('click', () => selectTab('security'));
-playButton.addEventListener('click', () => {playing = !playing; updatePlayLabel();});
+document.querySelector('.tabbar').addEventListener('keydown', event => {
+  const ids = ['worlds', 'boundary', 'security'];
+  const index = ids.indexOf(activeTab);
+  const next = event.key === 'ArrowRight' ? (index + 1) % ids.length :
+    event.key === 'ArrowLeft' ? (index + ids.length - 1) % ids.length :
+    event.key === 'Home' ? 0 : event.key === 'End' ? ids.length - 1 : -1;
+  if (next < 0) return;
+  event.preventDefault();
+  selectTab(ids[next]);
+  document.querySelector(`#tab-${ids[next]}`).focus();
+});
+playButton.addEventListener('click', () => {
+  playing = !playing;
+  updatePlayLabel();
+  if (playing) scheduleAnimation(); else stopAnimation();
+});
 resetButton.addEventListener('click', () => {fraction = 0; render();});
-timeSlider.addEventListener('input', () => {fraction = Number(timeSlider.value) / 1000; playing = false; updatePlayLabel(); render();});
+timeSlider.addEventListener('input', () => {fraction = Number(timeSlider.value) / 1000; playing = false; stopAnimation(); updatePlayLabel(); render();});
 kappaSlider.addEventListener('input', () => {
   boundaryOptions = {...BOUNDARY, kappaRight: Number(kappaSlider.value)};
   boundaryPath = simulateBoundary(boundaryOptions);
@@ -211,7 +246,7 @@ document.querySelectorAll('.examples button').forEach(button => button.addEventL
   queryKey.value = button.dataset.key;
   renderSecurity();
 }));
-document.querySelector('#export-receipt').addEventListener('click', () => {
+exportButton.addEventListener('click', () => {
   if (!currentSecurityReceipt) return;
   const blob = new Blob([JSON.stringify(currentSecurityReceipt, null, 2) + '\n'], {type: 'application/json'});
   const url = URL.createObjectURL(blob);
@@ -222,15 +257,40 @@ document.querySelector('#export-receipt').addEventListener('click', () => {
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 });
 
+function stopAnimation() {
+  if (frameHandle) cancelAnimationFrame(frameHandle);
+  frameHandle = 0;
+  lastFrame = 0;
+  accumulatedMs = 0;
+}
+function scheduleAnimation() {
+  if (playing && !document.hidden && activeTab !== 'security' && !frameHandle) {
+    frameHandle = requestAnimationFrame(animate);
+  }
+}
 function animate(now) {
-  if (playing && lastFrame) {
+  frameHandle = 0;
+  if (!playing || document.hidden || activeTab === 'security') {stopAnimation(); return;}
+  if (lastFrame) accumulatedMs += Math.min(now - lastFrame, 100);
+  lastFrame = now;
+  if (accumulatedMs >= 1000 / 30) {
     const durationMs = activeTab === 'worlds' ? 9500 : 12000;
-    fraction = (fraction + Math.min(now - lastFrame, 100) / durationMs) % 1;
+    fraction = (fraction + accumulatedMs / durationMs) % 1;
+    accumulatedMs = 0;
     render();
   }
-  lastFrame = now;
-  requestAnimationFrame(animate);
+  scheduleAnimation();
 }
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) stopAnimation(); else scheduleAnimation();
+});
+reducedMotion.addEventListener('change', event => {
+  if (event.matches) {
+    playing = false;
+    stopAnimation();
+    updatePlayLabel();
+  }
+});
 updatePlayLabel();
 render();
-requestAnimationFrame(animate);
+scheduleAnimation();

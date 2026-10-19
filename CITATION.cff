@@ -5,7 +5,7 @@ authors:
   - family-names: "Janovski"
     given-names: "Juri"
 title: "HALVETH Field Difference Lab"
-version: "0.2.0"
+version: "0.2.1"
 date-released: 2026-10-19
 license: Apache-2.0
 repository-code: "https://github.com/Juri-Halveth/halveth-field-difference-lab"

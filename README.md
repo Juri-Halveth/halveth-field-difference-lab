@@ -1,10 +1,10 @@
-# HALVETH · Field Difference Lab 0.2
+# HALVETH · Field Difference Lab 0.2.1
 
 Standalone, local-first visual laboratory for the question: What changes when the same entity encounters a different field rule? The third panel translates the **question pattern** to a synthetic software representation boundary. Open `index.html` in a browser with ES module support. If local `file://` modules are blocked by the browser, serve this directory locally, for example `python -m http.server 8846 --bind 127.0.0.1` and open `http://127.0.0.1:8846/`.
 
 **Project direction:** Juri Janovski / HALVETH. **License:** Apache-2.0 for the original content here. See [NOTICE](NOTICE) and [project identity](PROJECT_IDENTITY.md). This is a local model laboratory, not a target scanner.
 
-## Two separate experiments
+## Three separate experiments
 
 | Experiment | Entity and initial state | Field / rule | Boundary | Observation |
 | --- | --- | --- | --- | --- |
@@ -19,12 +19,16 @@ All values are dimensionless. These equations are **different model families**. 
 ## Run the model checks
 
 ```powershell
-node --test physics.test.mjs
+npm test
 ```
 
 The checks cover zero acceleration with retained velocity, radial sign change around `κ=1`, identical initial states, continuous position and velocity at the boundary, and the three declared synthetic software outcomes. They validate the declared model implementation, not physical reality or a real security vulnerability.
 
 The [security adapter](SECURITY_ADAPTER.md) defines the evidence path from local delta to a real, authorized case. Its downloadable JSON remains a synthetic model receipt. It is an **offline file bridge**, not a network tunnel or live GitHub/bounty-platform connector.
+
+## Runtime and accessibility
+
+The model calculations and synthetic text comparison run in the browser. Visiting the GitHub Pages site initially needs a network connection; the site does not install an offline cache. Animation drawing is capped at 30 frames per second, pauses when the page is hidden and stops requesting frames when paused. The system's reduced-motion preference starts the laboratory paused. Tabs support Left/Right, Home and End keys; the selected tab remains the one normal Tab stop. The mobile layout stacks comparison rails and uses 16-pixel input text to avoid automatic focus zoom on common phones.
 
 ## Provenance and next discriminating experiment
 
