@@ -1,4 +1,9 @@
-# HALVETH · Field Difference Lab 0.2.1
+# Feldlabor – Bewegung und Zustandswechsel sichtbar machen
+
+Ein eigenständiges visuelles Modelllabor. Die Experimente vergleichen deklarierte Regeln und zeigen ihre Auswirkungen auf Bewegung und Darstellung.
+
+[**Projekt öffnen →**](https://juri-halveth.github.io/halveth-field-difference-lab/) · [Arbeitsproben](https://juri-halveth.github.io/koennen/) · [Portfolio](https://juri-halveth.github.io/)
+
 
 Standalone, local-first visual laboratory for the question: What changes when the same entity encounters a different field rule? The third panel translates the **question pattern** to a synthetic software representation boundary. Open `index.html` in a browser with ES module support. If local `file://` modules are blocked by the browser, serve this directory locally, for example `python -m http.server 8846 --bind 127.0.0.1` and open `http://127.0.0.1:8846/`.
 
