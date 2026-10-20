@@ -31,7 +31,7 @@ The checks cover zero acceleration with retained velocity, radial sign change ar
 
 The [security adapter](SECURITY_ADAPTER.md) defines the evidence path from local delta to a real, authorized case. Its downloadable JSON remains a synthetic model receipt. It is an **offline file bridge**, not a network tunnel or live GitHub/bounty-platform connector.
 
-The separate [Zuse grid experiment](ZUSE_GRID_MODEL.md) turns a historical question about direction-dependent propagation on a Cartesian grid into an isolated, tested model. It does not change the three browser experiments or assert a physical result.
+The separate [interactive Zuse grid research room](zuse.html) turns a historical question about direction-dependent propagation on a Cartesian grid into an isolated, tested two-rule comparison. The [model note](ZUSE_GRID_MODEL.md) binds its assumptions, measurements, historical sources and claim ceiling. It does not change the three original browser experiments or assert a physical result.
 
 ## Runtime and accessibility
 
