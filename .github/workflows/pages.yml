@@ -17,8 +17,10 @@ jobs:
         run: npm test
       - name: Prepare static site
         run: |
-          mkdir -p _site
+          mkdir -p _site/experiments
           cp index.html style.css app.js physics.js security-model.js README.md SECURITY_ADAPTER.md PROJECT_IDENTITY.md LICENSE NOTICE _site/
+          cp zuse.html zuse.css zuse.js ZUSE_GRID_MODEL.md _site/
+          cp experiments/zuse-lattice.js _site/experiments/
           touch _site/.nojekyll
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v4
