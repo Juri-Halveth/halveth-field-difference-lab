@@ -1,0 +1,58 @@
+<!doctype html>
+<!-- Copyright 2026 Juri Janovski. SPDX-License-Identifier: Apache-2.0 -->
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080b17">
+  <meta name="description" content="Juri Janovskis interaktiver HALVETH-Forschungsraum: Zwei Gitterregeln, gleiche Varianz, verschiedene Ausbreitung. Mit Quellen zu Konrad Zuse.">
+  <title>Gleiche Statistik. Andere Welt. · HALVETH Forschung</title>
+  <link rel="canonical" href="https://juri-halveth.github.io/halveth-field-difference-lab/zuse.html">
+  <link rel="stylesheet" href="zuse.css">
+</head>
+<body>
+  <a class="skip" href="#experiment">Zum Experiment springen</a>
+  <header class="topbar"><a class="brand" href="index.html">◈ HALVETH <span>FIELD DIFFERENCE LAB</span></a><span>FORSCHUNG / 01</span></header>
+  <main>
+    <section class="hero" aria-labelledby="title">
+      <p class="eyebrow">JURI JANOVSKI · AUS EINER HISTORISCHEN FRAGE WIRD EIN PRÜFBARES MODELL</p>
+      <h1 id="title">Gleiche Statistik.<br><em>Andere Welt.</em></h1>
+      <p class="intro">Zwei Regeln schicken denselben Impuls über ein Gitter. Beide liefern nach jedem Schritt dieselbe Gesamtmenge und dieselbe Ausbreitungsvarianz in X und Y. Trotzdem erreichen sie verschiedene Orte. <strong>Welche Beobachtung würde den Unterschied sichtbar machen?</strong></p>
+      <div class="hero-links"><a href="#experiment">Selbst ausprobieren ↓</a><a href="#quellen">Quellen prüfen ↗</a></div>
+      <p class="scope">Stand 20. Oktober 2026 · Originaler, getesteter Softwarevergleich unter Apache-2.0 · keine Messung der physischen Raumzeit</p>
+    </section>
+
+    <section id="experiment" class="experiment" aria-labelledby="experiment-title">
+      <div class="section-heading"><p class="eyebrow">01 / GEGENPROBE</p><h2 id="experiment-title">Ein Startpunkt. Zwei Regeln.</h2><p>Bewege den Regler. Die leuchtenden Zellen zeigen, welche Positionen nach genau dieser Schrittzahl erreichbar sind. Wechsle zur Intensität, um die verteilte Menge zu sehen.</p></div>
+      <div class="controls">
+        <label for="steps">Schritte <output id="step-value" for="steps">4</output></label>
+        <input id="steps" type="range" min="0" max="8" step="1" value="4">
+        <fieldset><legend>Darstellung</legend><label><input type="radio" name="view" value="support" checked> Erreichbare Zellen</label><label><input type="radio" name="view" value="intensity"> Intensität</label></fieldset>
+      </div>
+      <div class="grid-pair">
+        <article class="model-card four"><div class="card-head"><span>REGEL A</span><h3>Vier Nachbarn</h3><p>Je ¼ nach Norden, Süden, Osten und Westen.</p></div><canvas id="four-grid" width="544" height="544" role="img" aria-label="Erreichbare Zellen der Vier-Nachbarn-Regel"></canvas><dl id="four-metrics" class="readouts"></dl></article>
+        <article class="model-card eight"><div class="card-head"><span>REGEL B</span><h3>Acht Nachbarn + Verbleib</h3><p>Je ¹⁄₁₂ zu acht Nachbarn; ⅓ bleibt am Ort.</p></div><canvas id="eight-grid" width="544" height="544" role="img" aria-label="Erreichbare Zellen der Acht-Nachbarn-Regel mit Verbleib"></canvas><dl id="eight-metrics" class="readouts"></dl></article>
+      </div>
+      <div class="insight" role="status" aria-live="polite"><span>DER UNTERSCHIED</span><p id="insight-text"></p></div>
+      <p class="method">Beide Regeln erhalten die Gesamtmenge und besitzen pro Schritt dieselbe Varianz von ½ in X und Y. Ihre Einzelschritte und maximalen Reichweiten sind verschieden. Helle Zellen im Modus „Erreichbare Zellen“ zeigen auch extrem kleine positive Mengen; der Intensitätsmodus zeigt deren Größenverhältnis. Endliche Genauigkeit und eine Messschwelle können die äußersten Zellen in einer realen Beobachtung verdecken.</p>
+    </section>
+
+    <section class="history" id="quellen" aria-labelledby="sources-title">
+      <div class="section-heading"><p class="eyebrow">02 / QUELLENKETTE</p><h2 id="sources-title">Was Zuse wirklich belegt.</h2><p>Historische Vorarbeit und Juris heutiger Code stehen nebeneinander. Jede Karte nennt, was wir aus der jeweiligen Quelle entnehmen.</p></div>
+      <div class="source-grid">
+        <article><span>1956 · ARCHIVBELEG</span><h3>Gitterförmige Feldwerte</h3><p>Das Findbuch des Deutschen Museums nennt eine Patentanmeldung Zuses vom 25. Februar 1956 für Berechnungen auf gitterartig angeordneten Feldwerten. Die Patentschrift selbst ist hier noch nicht technisch verglichen.</p><a href="https://www.deutsches-museum.de/assets/Forschung/Archiv/Download/Findbuecher_PDF/NL_207_Zuse.pdf#page=309">Findbuch NL 207/1005 ↗</a></article>
+        <article><span>1958 · PUBLIKATION VERZEICHNET</span><h3>Die Feldrechenmaschine</h3><p>Ein Aufsatz Zuses von 1958 ist im selben Findbuch verzeichnet. Das stützt die historische Forschungsrichtung „Feldrechnung“, aber noch keine Gleichheit der Rechenregeln.</p><a href="https://www.deutsches-museum.de/assets/Forschung/Archiv/Download/Findbuecher_PDF/NL_207_Zuse.pdf#page=644">Findbuch NL 207/2626 ↗</a></article>
+        <article><span>1967 · ARTIKEL GELESEN</span><h3>Rechnender Raum</h3><p>Zuse diskutiert Richtungsunterschiede diskreter Gitter und die Frage, ob ein späterer Zustand den früheren eindeutig bestimmt. Er bezeichnet seine damaligen Untersuchungen als auf dem Papier durchgeführt.</p><a href="https://www.spektrum.de/pdf/rechnenderraum-pdf/1030307?file=">Originalartikel im Nachdruck ↗</a></article>
+        <article><span>2026 · AUSFÜHRBARER CODE</span><h3>Juris Gegenprobe</h3><p>Zwei offen definierte Regeln werden mit demselben Startpunkt und Zeithorizont verglichen. Tests prüfen Erhaltung, gleiche zweite Momente und unterschiedliche gemeinsame Struktur.</p><a href="https://github.com/Juri-Halveth/halveth-field-difference-lab/blob/main/experiments/zuse-lattice.js">Code und Tests auf GitHub ↗</a></article>
+      </div>
+    </section>
+
+    <section class="transfer" aria-labelledby="transfer-title"><div class="section-heading"><p class="eyebrow">03 / WAS DIE FORSCHUNG ÜBERTRÄGT</p><h2 id="transfer-title">Aus Ähnlichkeit wird eine bessere Frage.</h2></div>
+      <div class="transfer-grid"><article><b>LUCINET · RÜCKWÄRTS DEBUGGEN</b><p>Wenn zwei Ausgangszustände dasselbe Ergebnis erzeugen, muss ein Rückwärtsmodell beide Kandidaten erhalten. Zuses 1967er Artikel stellt genau die Umkehrbarkeitsfrage für Automaten; die LUCINET-Anwendung ist unsere eigene Prüfrichtung.</p></article><article><b>SCARLET / SEEDSPACE · GENERIEREN</b><p>Das Archiv verzeichnet Zuses Manuskripte zur rechnergestützten Grafik um 1965 sowie eine Typoskriptfassung von 1967. Für die heutigen Oberflächen prüfen wir getrennt: Erzeugungsregel, Rendering, Interaktion und Herkunft.</p></article><article><b>WUNSCHKUGEL · PLAN UND AUSFÜHRUNG</b><p>Der Archivindex nennt frühere Arbeiten zu Rechenplänen. In unserer Software sollten Textwunsch, daraus abgeleiteter Plan, lauffähiger Code und beobachtetes Ergebnis einzeln sichtbar sein.</p></article></div>
+      <p class="claim">Diese Verbindungen sind Forschungsfragen. Archivtitel liefern keine verborgene technische Identität, und das Gitterexperiment liefert keinen physikalischen Nachweis. Sein nachprüfbarer Beitrag ist die <strong>unterscheidende Messgröße</strong> zwischen zwei deklarierten Modellen.</p>
+    </section>
+  </main>
+  <footer><span>Juri Janovski / HALVETH · Forschung und Implementierung 2026</span><nav><a href="index.html">Feldlabor</a><a href="ZUSE_GRID_MODEL.md">Methodennotiz</a><a href="https://github.com/Juri-Halveth/halveth-field-difference-lab">GitHub</a></nav></footer>
+  <script type="module" src="zuse.js"></script>
+</body>
+</html>

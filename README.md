@@ -31,6 +31,8 @@ The checks cover zero acceleration with retained velocity, radial sign change ar
 
 The [security adapter](SECURITY_ADAPTER.md) defines the evidence path from local delta to a real, authorized case. Its downloadable JSON remains a synthetic model receipt. It is an **offline file bridge**, not a network tunnel or live GitHub/bounty-platform connector.
 
+The separate [interactive Zuse grid research room](zuse.html) turns a historical question about direction-dependent propagation on a Cartesian grid into an isolated, tested two-rule comparison. The [model note](ZUSE_GRID_MODEL.md) binds its assumptions, measurements, historical sources and claim ceiling. It does not change the three original browser experiments or assert a physical result.
+
 ## Runtime and accessibility
 
 The model calculations and synthetic text comparison run in the browser. Visiting the GitHub Pages site initially needs a network connection; the site does not install an offline cache. Animation drawing is capped at 30 frames per second, pauses when the page is hidden and stops requesting frames when paused. The system's reduced-motion preference starts the laboratory paused. Tabs support Left/Right, Home and End keys; the selected tab remains the one normal Tab stop. The mobile layout stacks comparison rails and uses 16-pixel input text to avoid automatic focus zoom on common phones.
