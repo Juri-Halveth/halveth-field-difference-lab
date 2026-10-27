@@ -36,6 +36,7 @@ privaten Dateien im Projektordner ablegen.
 ## Das Ergebnis selbst prüfen
 
 Mit Node.js: `npm test`. Zusätzliche npm-Pakete sind dafür nicht erforderlich.
+Die Prüfung des Website-Pakets verwendet Bash; unter Windows ist das Git Bash.
 Die Tests prüfen die implementierten Modellregeln: gleiche Anfangszustände,
 Vorzeichenwechsel, den Grenzübertritt und die verschiedenen Softwareauswahlen.
 Der Workflow **Source checks** führt diese Prüfung bei jedem PR und auf `main` aus.
