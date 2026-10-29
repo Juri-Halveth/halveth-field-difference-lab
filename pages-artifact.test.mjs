@@ -43,6 +43,26 @@ function assertGuideLinksResolve(site) {
   }
 }
 
+function assertEntryAssetsResolve(site) {
+  const html = readFileSync(join(site, 'index.html'), 'utf8');
+  const refs = [...html.matchAll(/<(?:link|script)\b[^>]*\b(?:href|src)="([^"]+)"/g)]
+    .map(([, href]) => href)
+    .filter(href => !/^[a-z][a-z0-9+.-]*:/i.test(href) && !href.startsWith('#'));
+  assert.ok(refs.includes('style.css'), 'the entry page links its stylesheet');
+  assert.ok(refs.includes('app.js'), 'the entry page loads its application module');
+  for (const href of refs) {
+    const target = resolve(site, decodeURIComponent(href.split(/[?#]/)[0]));
+    assert.ok(target.startsWith(`${resolve(site)}${sep}`), `entry asset stays in the published site: ${href}`);
+    assert.ok(existsSync(target), `missing published entry asset ${href}`);
+  }
+  const app = readFileSync(join(site, 'app.js'), 'utf8');
+  for (const [, href] of app.matchAll(/\bfrom\s+['"](\.[^'"]+)['"]/g)) {
+    const target = resolve(site, href);
+    assert.ok(target.startsWith(`${resolve(site)}${sep}`), `module import stays in the published site: ${href}`);
+    assert.ok(existsSync(target), `missing published module import ${href}`);
+  }
+}
+
 test('the Pages artifact serves both guides and their local documentation links', () => {
   withPublishedSite(site => {
     assertGuideLinksResolve(site);
@@ -56,5 +76,16 @@ test('a package missing the linked technical guide is rejected', () => {
     assert.equal(dirname(target), resolve(site));
     rmSync(target);
     assert.throws(() => assertGuideLinksResolve(site), /missing published link README\.en\.md/);
+  });
+});
+
+test('the Pages artifact contains the entry stylesheet, script and module imports', () => {
+  withPublishedSite(assertEntryAssetsResolve);
+});
+
+test('a package without the entry stylesheet is rejected', () => {
+  withPublishedSite(site => {
+    rmSync(join(site, 'style.css'));
+    assert.throws(() => assertEntryAssetsResolve(site), /missing published entry asset style\.css/);
   });
 });
