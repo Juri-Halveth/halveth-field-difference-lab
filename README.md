@@ -33,6 +33,13 @@ Danach [127.0.0.1:8846](http://127.0.0.1:8846/) öffnen. Die Berechnung läuft i
 Browser; der Server liefert nur die lokalen Dateien. Für diese Vorschau keine
 privaten Dateien im Projektordner ablegen.
 
+Wenn nur unformatierter Text erscheint oder die vier Bahnen fehlen, ist die
+Vorschau unvollständig geladen. Prüfe `http://127.0.0.1:8846/style.css`,
+`http://127.0.0.1:8846/app.js`, `http://127.0.0.1:8846/physics.js` und
+`http://127.0.0.1:8846/security-model.js`: Jeder Abruf muss die entsprechende
+Datei mit HTTP 200 liefern. Starte den Server bei Bedarf nach dem `cd` im
+Projektordner neu und lade die Laborseite erneut.
+
 ## Das Ergebnis selbst prüfen
 
 Mit Node.js: `npm test`. Zusätzliche npm-Pakete sind dafür nicht erforderlich.
