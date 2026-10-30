@@ -93,6 +93,10 @@ function assertAtomRoomResolves(site) {
 function assertZuseEncounterRoomResolves(site) {
   const room = readFileSync(join(site, 'zuse.html'), 'utf8');
   assert.match(room, /id="encounter-grid"/, 'the four-place canvas is published');
+  const cssVersion = room.match(/href="zuse\.css\?v=([^"]+)"/)?.[1];
+  const jsVersion = room.match(/src="zuse\.js\?v=([^"]+)"/)?.[1];
+  assert.ok(cssVersion, 'the Zuse stylesheet has a release-specific cache key');
+  assert.equal(jsVersion, cssVersion, 'script and stylesheet share the release cache key');
   const view = readFileSync(join(site, 'zuse.js'), 'utf8');
   const imports = [...view.matchAll(/\bfrom\s+['"](\.[^'"]+)['"]/g)].map(([, path]) => path);
   assert.ok(imports.includes('./experiments/four-encounters.js'));
