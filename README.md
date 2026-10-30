@@ -4,18 +4,26 @@
 
 Was verändert sich, wenn dieselbe Bewegung unter einer anderen Modellregel
 abläuft? Dieses Browserlabor stellt die Verläufe nebeneinander — zum Lernen,
-Erklären und Prüfen eigener Modellannahmen.
+Erklären und Prüfen eigener Modellannahmen. Die Startseite enthält drei
+Experimente; zwei eigenständige Forschungsräume vertiefen andere Fragen.
 
 [**Im Browser ausprobieren**](https://juri-halveth.github.io/halveth-field-difference-lab/) ·
 [Gleichungen und Methoden](README.en.md) · [Quellcode](physics.js)
 
-## Drei Experimente zum direkten Vergleichen
+## Drei Experimente auf der Startseite
 
 | Einstieg | Was sich verändern lässt | Was sichtbar wird |
 | --- | --- | --- |
 | Vier Welten | Die Regel für die Beschleunigung bei gleichem Start | Unterschiedliche Bahnen desselben Startzustands |
 | Grenzübertritt | Die Feldregel rechts einer Grenze | Stetige Position und Geschwindigkeit bei wechselnder Beschleunigung |
 | Softwarevergleich | Auswahl der ersten oder letzten gleichnamigen Eingabe | Unterschiedliche Ergebnisse aus denselben Eingabebytes |
+
+## Zwei eigenständige Forschungsräume
+
+| Raum | Frage | Nachweisgrenze |
+| --- | --- | --- |
+| [Atom, Null und Materie](atom.html) | Was ändert das Anhängen einer binären Null, und was wäre für eine reale Materialänderung nötig? | Der Zahlenoperator ändert eine Repräsentation. Die STAR-Grafik zeigt eine rekonstruierte Goldionenkollision, kein Einzelatom. [Modell und Quellen](ATOM_NULL_MODEL.md) |
+| [Zuse-Gitterforschung](zuse.html) | Wie verhalten sich zwei gesetzte Ausbreitungsregeln auf einem Gitter? | Das ausführbare Gittermodell ist keine Messung einer neuen Naturkraft. [Modellvertrag](ZUSE_GRID_MODEL.md) |
 
 Die Werte des Bewegungsmodells sind dimensionslos. Seine Gleichungen,
 Gegenbeispiele und die Trennung vom Softwaremodell stehen in der

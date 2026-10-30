@@ -5,7 +5,7 @@ Ein eigenständiges visuelles Modelllabor. Die Experimente vergleichen deklarier
 [**Projekt öffnen →**](https://juri-halveth.github.io/halveth-field-difference-lab/) · [Arbeitsproben](https://juri-halveth.github.io/koennen/) · [Portfolio](https://juri-halveth.github.io/)
 
 
-Standalone, local-first visual laboratory for the question: What changes when the same entity encounters a different field rule? The third panel translates the **question pattern** to a synthetic software representation boundary. Open `index.html` in a browser with ES module support. If local `file://` modules are blocked by the browser, serve this directory locally, for example `python -m http.server 8846 --bind 127.0.0.1` and open `http://127.0.0.1:8846/`.
+Standalone, local-first visual laboratory for the question: What changes when the same entity encounters a different field rule? The start page has three experiments; two separate research rooms extend the question. The third panel translates the **question pattern** to a synthetic software representation boundary. Open `index.html` in a browser with ES module support. If local `file://` modules are blocked by the browser, serve this directory locally, for example `python -m http.server 8846 --bind 127.0.0.1` and open `http://127.0.0.1:8846/`.
 
 **Project direction:** Juri Janovski / HALVETH. **License:** Apache-2.0 for the original content here. See [NOTICE](NOTICE) and [project identity](PROJECT_IDENTITY.md). This is a local model laboratory, not a target scanner.
 
@@ -32,6 +32,8 @@ The checks cover zero acceleration with retained velocity, radial sign change ar
 The [security adapter](SECURITY_ADAPTER.md) defines the evidence path from local delta to a real, authorized case. Its downloadable JSON remains a synthetic model receipt. It is an **offline file bridge**, not a network tunnel or live GitHub/bounty-platform connector.
 
 The separate [interactive Zuse grid research room](zuse.html) turns a historical question about direction-dependent propagation on a Cartesian grid into an isolated, tested two-rule comparison. The [model note](ZUSE_GRID_MODEL.md) binds its assumptions, measurements, historical sources and claim ceiling. It does not change the three original browser experiments or assert a physical result.
+
+The separate [Atom, Zero and Matter room](atom.html) compares a binary representation operation with a physical state change, then traces a STAR detector event display back to its measurement context. The [model and source note](ATOM_NULL_MODEL.md) identifies Brookhaven, DOE and IUPAC sources and distinguishes reconstructed particle tracks from a photograph of an individual atom. No source image or private user material is bundled.
 
 ## Runtime and accessibility
 

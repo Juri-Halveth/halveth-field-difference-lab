@@ -63,6 +63,33 @@ function assertEntryAssetsResolve(site) {
   }
 }
 
+function assertAtomRoomResolves(site) {
+  const entry = readFileSync(join(site, 'index.html'), 'utf8');
+  assert.match(entry, /href="atom\.html"/, 'the entry page links the atom room');
+
+  const room = readFileSync(join(site, 'atom.html'), 'utf8');
+  const refs = [...room.matchAll(/<(?:link|script)\b[^>]*\b(?:href|src)="([^"]+)"/g)]
+    .map(([, href]) => href)
+    .filter(href => !/^[a-z][a-z0-9+.-]*:/i.test(href) && !href.startsWith('#'));
+  assert.ok(refs.includes('atom.css'), 'the atom room links its stylesheet');
+  assert.ok(refs.includes('atom-view.js'), 'the atom room loads its view module');
+  for (const href of refs) {
+    const target = resolve(site, decodeURIComponent(href.split(/[?#]/)[0]));
+    assert.ok(target.startsWith(`${resolve(site)}${sep}`), `atom asset stays in the published site: ${href}`);
+    assert.ok(existsSync(target), `missing published atom asset ${href}`);
+  }
+
+  const view = readFileSync(join(site, 'atom-view.js'), 'utf8');
+  const imports = [...view.matchAll(/\bfrom\s+['"](\.[^'"]+)['"]/g)].map(([, path]) => path);
+  assert.ok(imports.includes('./atom-model.js'), 'the view imports the atom model');
+  for (const path of imports) {
+    const target = resolve(site, path);
+    assert.ok(target.startsWith(`${resolve(site)}${sep}`), `atom module import stays in the published site: ${path}`);
+    assert.ok(existsSync(target), `missing published atom module import ${path}`);
+  }
+  assert.ok(existsSync(join(site, 'ATOM_NULL_MODEL.md')), 'the source-bound model note is published');
+}
+
 test('the Pages artifact serves both guides and their local documentation links', () => {
   withPublishedSite(site => {
     assertGuideLinksResolve(site);
@@ -88,4 +115,8 @@ test('a package without the entry stylesheet is rejected', () => {
     rmSync(join(site, 'style.css'));
     assert.throws(() => assertEntryAssetsResolve(site), /missing published entry asset style\.css/);
   });
+});
+
+test('the published atom room keeps its entry, view, model and source note together', () => {
+  withPublishedSite(assertAtomRoomResolves);
 });
