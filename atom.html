@@ -1,0 +1,115 @@
+<!doctype html>
+<!-- Copyright 2026 Juri Janovski. SPDX-License-Identifier: Apache-2.0 -->
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090a10">
+  <meta name="description" content="RED ROOM: Binärzahl, Materialzustand und die Herkunft einer STAR-Detektorgrafik interaktiv auseinanderhalten.">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; form-action 'none'; object-src 'none'; base-uri 'none'; frame-src 'none'">
+  <title>Bild · Null · Materie | HALVETH RED ROOM</title>
+  <link rel="stylesheet" href="atom.css">
+  <script type="module" src="atom-view.js"></script>
+</head>
+<body>
+  <a class="skip" href="#experiment">Zum Experiment springen</a>
+  <header class="topbar">
+    <a class="brand" href="index.html" aria-label="Zum HALVETH Field Difference Lab"><span class="brand-mark" aria-hidden="true">◈</span> HALVETH <span class="brand-divider">/</span> RED ROOM</a>
+    <nav aria-label="Seitenbereiche">
+      <a href="#experiment">Die Null</a>
+      <a href="#bild">Das Bild</a>
+      <a href="#quellen">Die Quellen</a>
+    </nav>
+    <span class="top-status"><span aria-hidden="true"></span> OFFLINE LABOR</span>
+  </header>
+
+  <main>
+    <section class="hero shell" aria-labelledby="title">
+      <div class="hero-art" aria-hidden="true"><div class="orb"><div class="orb-core"></div></div></div>
+      <div class="hero-content">
+        <p class="eyebrow"><span>00</span> / HALVETH · LUCINET · REKONSTRUKTION</p>
+        <h1 id="title">Eine Null.<br><em>Eine andere Zahl.</em><br>Was ändert Materie?</h1>
+        <p class="lead">Ein verblüffendes Binärmuster trifft auf ein spektakuläres Bild aus der Teilchenforschung. Beides ist echt interessant. Hier kannst du selbst prüfen, <strong>welche Schicht sich tatsächlich verändert</strong>.</p>
+        <div class="hero-actions"><a class="button primary" href="#experiment">Null anhängen <span aria-hidden="true">↗</span></a><a class="button ghost" href="#bild">Bild zurückverfolgen <span aria-hidden="true">↘</span></a></div>
+        <p class="hero-receipt"><span class="pulse" aria-hidden="true"></span> Zwei getrennte Prüfspuren · eigene schematische Grafik · keine externen Dienste</p>
+      </div>
+    </section>
+
+    <section id="experiment" class="section section-number shell" aria-labelledby="number-title">
+      <div class="section-head"><div><p class="eyebrow"><span>01</span> / ZAHL UND ZUSTAND</p><h2 id="number-title">Was tut die <em>Null?</em></h2></div><p>Wähle eine Ordnungszahl. Der Operator hängt rechts eine binäre Null an. Die beiden Seiten zeigen, was der Rechner im Speicher ändert und was für eine Umwandlung des bezeichneten Atomkerns zusätzlich fehlen würde.</p></div>
+      <div class="lab-panel">
+        <div class="lab-toolbar">
+          <label for="start-z">Ausgangszahl</label>
+          <select id="start-z">
+            <option value="31">31 · Gallium</option>
+            <option value="32" selected>32 · Germanium</option>
+            <option value="64">64 · Gadolinium</option>
+          </select>
+          <span class="toolbar-hint">Drei feste Gegenproben · lokal berechnet</span>
+        </div>
+        <div class="lane-grid">
+          <article class="lane lane-number" aria-labelledby="number-lane-title">
+            <div class="lane-head"><span class="lane-icon" aria-hidden="true">01</span><div><p class="tiny-label">REPRÄSENTATION</p><h3 id="number-lane-title">Die Zahl</h3></div><span class="lane-state valid">BERECHNET</span></div>
+            <div class="binary-pair"><div class="binary-cell"><span>VORHER</span><strong id="before-binary">100000</strong><small id="before-element">32 · Germanium</small></div><div class="operator" aria-label="Binäre Null rechts anhängen"><span>0<br>anhängen</span><b aria-hidden="true">→</b></div><div class="binary-cell"><span>NACHHER</span><strong id="after-binary">1000000</strong><small id="after-element">64 · Gadolinium</small></div></div>
+            <p id="number-result" class="lane-result" role="status" aria-live="polite">Die dargestellte Zahl verdoppelt sich.</p>
+            <p class="lane-foot">Operator: Eine Null rechts an die Binärzahl anhängen, gleichbedeutend mit <code>Z &lt;&lt; 1</code> oder <code>Z × 2</code>. Im Rechner ändern sich dabei physische Speicherzustände. Die neue Zahl erhält nur dann einen Elementnamen, wenn das Element bestätigt ist.</p>
+          </article>
+          <article class="lane lane-matter" aria-labelledby="matter-lane-title">
+            <div class="lane-head"><span class="lane-icon" aria-hidden="true">02</span><div><p class="tiny-label">MATERIELLER ZUSTAND</p><h3 id="matter-lane-title">Der Kern</h3></div><span class="lane-state open">OFFENE BRÜCKE</span></div>
+            <div class="matter-comparison"><div><span>GEBUNDENER AUSGANG</span><strong id="matter-before">Z = 32</strong><small>Protonenzahl eines gedachten Kerns</small></div><div class="missing-bridge" aria-label="Kein physikalischer Übergang ausgeführt">?</div><div><span>ANDERER ZUSTAND</span><strong id="matter-after">Z = 64</strong><small>Benötigt Reaktion und Messung</small></div></div>
+            <p id="matter-result" class="lane-result">Der bezeichnete Atomkern wird durch die Rechenoperation nicht umgewandelt.</p>
+            <p class="lane-foot">Für einen realen Übergang bräuchten wir einen benannten Prozess, Reaktionsprodukte, Energie- und Ladungsbilanz sowie einen Messnachweis. Der fehlende Pfeil bleibt als Forschungsfrage sichtbar.</p>
+          </article>
+        </div>
+        <div class="first-difference"><span>ERSTE UNTERSCHEIDUNG</span><p>Gleicher Ausdruck „verändern“, verschiedene Bezugsobjekte: <b>physische Speicherzustände, die eine Bitfolge tragen</b>, und <b>der damit bezeichnete Atomkern</b>. Die Rechenoperation ist hier ausgeführt; eine Kernreaktion wurde nicht definiert.</p></div>
+        <div class="learning-check" aria-labelledby="learning-title">
+          <div><span class="tiny-label">KURZE GEGENPROBE · NUR IN DIESEM BROWSER</span><h3 id="learning-title">Was hat das Anhängen der binären Null hier verändert?</h3></div>
+          <div class="answer-group" role="group" aria-label="Antwort wählen">
+            <button type="button" data-answer="number" aria-pressed="false">Zahl und Einordnung</button>
+            <button type="button" data-answer="nucleus" aria-pressed="false">Vorhandenen Atomkern</button>
+            <button type="button" data-answer="both" aria-pressed="false">Beides</button>
+          </div>
+          <p id="learning-feedback" role="status" aria-live="polite">Wähle eine Aussage und vergleiche sie mit beiden Spuren.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="bild" class="section section-image" aria-labelledby="image-title">
+      <div class="shell">
+        <div class="section-head"><div><p class="eyebrow"><span>02</span> / QUELLE ZURÜCKVERFOLGEN</p><h2 id="image-title">Was zeigt das <em>Bild?</em></h2></div><p>Der virale Satz nennt es eine Atomaufnahme. Geh den Weg zurück: von der Beschriftung zur Darstellung und zu den gemessenen Folgen einer Goldionenkollision.</p></div>
+        <div class="image-lab">
+          <div class="visual-card">
+            <div class="visual-header"><span>STAR / RHIC · EIGENE SCHEMATISCHE ANSICHT</span><span>KEINE ORIGINALDATEN</span></div>
+            <svg id="star-schematic" viewBox="0 0 620 620" role="img" aria-label="Eigene schematische Ansicht der Schritte einer Goldionenkollision. Keine Originaldaten des STAR-Detektors.">
+              <title>Eigene schematische STAR-Ansicht</title>
+              <desc>Die Grafik veranschaulicht Kollision, Detektorsignale, rekonstruierte Spuren, Darstellung und spätere Beschriftung. Sie verwendet keine Originalmessdaten.</desc>
+            </svg>
+            <div class="visual-footer"><span>SCHEMA ≠ MESSUNG</span><span id="visual-phase">01 / 05</span></div>
+          </div>
+          <div class="timeline-card">
+            <p class="tiny-label">FÜNF SCHICHTEN · ZWEI ZEITEN</p>
+            <div class="timeline-heading"><span id="stage-date">2000</span><span id="stage-kind">EREIGNIS</span></div>
+            <h3 id="stage-title">Goldionenkollision</h3>
+            <p id="stage-description">Im RHIC treffen Goldionen aufeinander.</p>
+            <div class="claim-box"><span>WAS DIESER SCHRITT TRÄGT</span><p id="stage-claim"></p></div>
+            <div class="timeline-control"><label for="stage-slider">Weg durch die Quelle <output id="stage-count" for="stage-slider">1 / 5</output></label><input id="stage-slider" type="range" min="0" max="4" step="1" value="0"><div class="timeline-buttons"><button id="stage-prev" type="button" disabled>← Zurück</button><button id="stage-next" type="button">Weiter →</button></div></div>
+            <ol id="stage-steps" class="stage-steps" aria-label="Schritte der Rekonstruktion"></ol>
+          </div>
+        </div>
+        <div class="image-insight"><span>DER STARKE FUND</span><p>Forscher untersuchen einen sehr kurzen, schwer direkt beobachtbaren Zustand über seine Spuren. RED ROOM kann dieselbe Logik nutzen: <b>Signal → Rekonstruktion → Darstellung → Aussage</b>, mit Quelle und Zeit an jedem Übergang. Der Social-Media-Titel ist ein späterer Claim, kein Detektorsignal.</p></div>
+      </div>
+    </section>
+
+    <section id="quellen" class="section section-sources shell" aria-labelledby="sources-title">
+      <div class="section-head"><div><p class="eyebrow"><span>03</span> / ORIGINAL UND GRENZE</p><h2 id="sources-title">Die Quellen <em>offenlegen.</em></h2></div><p>Diese Links verlassen die lokale Laborseite erst, wenn du sie öffnest. Die Visualisierung selbst sendet keine Anfragen.</p></div>
+      <div class="source-grid">
+        <article><span>2000 · ORIGINALKONTEXT</span><h3>Brookhaven: STAR-Ereignis</h3><p>Brookhaven bezeichnet die Vorlage als Endansicht einer Goldionenkollision im STAR-Detektor.</p><a href="https://www.bnl.gov/newsroom/news.php?a=111052" target="_blank" rel="noopener noreferrer">Originalbeschreibung lesen ↗</a></article>
+        <article><span>2025 · RÜCKBLICK</span><h3>US-Energieministerium: Spuren</h3><p>Der Rückblick erklärt die Detektoransicht und warum Forschende aus ausgehenden Teilchen auf den kurzlebigen Zustand schließen.</p><a href="https://www.energy.gov/science/articles/quarter-century-surprises-exploring-quark-gluon-plasma" target="_blank" rel="noopener noreferrer">Versuch erklären lassen ↗</a></article>
+        <article><span>PERIODENSYSTEM · REFERENZ</span><h3>IUPAC: Ordnungszahlen</h3><p>Germanium hat Z = 32, Gadolinium Z = 64. Eine neue Binärschreibweise allein ist keine Kernreaktion.</p><a href="https://iupac.org/what-we-do/periodic-table-of-elements/" target="_blank" rel="noopener noreferrer">Elemente nachsehen ↗</a></article>
+      </div>
+      <div class="source-rule"><strong>Offene Forschungsfrage bleibt offen.</strong><p>Ausgrabungen und fiktionale Steine dürfen Ideen für Geschichten und neue Fragen liefern. Dieses Bild belegt weder einen Fund noch ein unbekanntes Element. Für einen materiellen Fund wären Probe, Herkunft und Messkette nötig. <a href="ATOM_NULL_MODEL.md">Modellregeln und Prüfstand lesen ↗</a></p></div>
+    </section>
+  </main>
+  <footer class="footer shell"><span>Juri Janovski · HALVETH / LUCINET · RED ROOM</span><nav aria-label="Weitere Seiten"><a href="index.html">Field Difference Lab</a><a href="zuse.html">Gitterforschung</a><a href="README.md">Projektstand</a></nav><span>Eigener Code: Apache-2.0 · Quelle und Modell getrennt</span></footer>
+</body>
+</html>

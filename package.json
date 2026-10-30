@@ -4,6 +4,6 @@
   "version": "0.2.1",
   "type": "module",
   "scripts": {
-    "test": "node --test physics.test.mjs security-model.test.mjs experiments/zuse-lattice.test.mjs pages-artifact.test.mjs"
+    "test": "node --test physics.test.mjs security-model.test.mjs experiments/zuse-lattice.test.mjs atom-model.test.mjs pages-artifact.test.mjs"
   }
 }
