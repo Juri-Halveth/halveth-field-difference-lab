@@ -90,6 +90,22 @@ function assertAtomRoomResolves(site) {
   assert.ok(existsSync(join(site, 'ATOM_NULL_MODEL.md')), 'the source-bound model note is published');
 }
 
+function assertZuseEncounterRoomResolves(site) {
+  const room = readFileSync(join(site, 'zuse.html'), 'utf8');
+  assert.match(room, /id="encounter-grid"/, 'the four-place canvas is published');
+  const view = readFileSync(join(site, 'zuse.js'), 'utf8');
+  const imports = [...view.matchAll(/\bfrom\s+['"](\.[^'"]+)['"]/g)].map(([, path]) => path);
+  assert.ok(imports.includes('./experiments/four-encounters.js'));
+  for (const path of imports) {
+    const target = resolve(site, path);
+    assert.ok(target.startsWith(`${resolve(site)}${sep}`), `zuse module stays in the published site: ${path}`);
+    assert.ok(existsSync(target), `missing published zuse module import ${path}`);
+  }
+  const model = readFileSync(join(site, 'experiments/four-encounters.js'), 'utf8');
+  assert.match(model, /from '.\/zuse-lattice\.js'/);
+  assert.ok(existsSync(join(site, 'experiments/zuse-lattice.js')));
+}
+
 test('the Pages artifact serves both guides and their local documentation links', () => {
   withPublishedSite(site => {
     assertGuideLinksResolve(site);
@@ -119,4 +135,8 @@ test('a package without the entry stylesheet is rejected', () => {
 
 test('the published atom room keeps its entry, view, model and source note together', () => {
   withPublishedSite(assertAtomRoomResolves);
+});
+
+test('the published Zuse room contains the four-place model and its field dependency', () => {
+  withPublishedSite(assertZuseEncounterRoomResolves);
 });
