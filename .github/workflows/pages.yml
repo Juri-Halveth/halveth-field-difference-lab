@@ -20,7 +20,7 @@ jobs:
           mkdir -p _site/experiments
           cp index.html style.css app.js physics.js security-model.js atom.html atom.css atom-view.js atom-model.js README.md README.en.md ATOM_NULL_MODEL.md SECURITY_ADAPTER.md PROJECT_IDENTITY.md LICENSE NOTICE _site/
           cp zuse.html zuse.css zuse.js ZUSE_GRID_MODEL.md _site/
-          cp experiments/zuse-lattice.js _site/experiments/
+          cp experiments/zuse-lattice.js experiments/four-encounters.js _site/experiments/
           touch _site/.nojekyll
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v4
