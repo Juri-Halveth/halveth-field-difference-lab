@@ -82,6 +82,31 @@ test('the blue field can suggest another action without displacing a body', () =
   }
 });
 
+test('a revisit remains in the chronological trail even when novelty stays unique', () => {
+  const session = createEncounterSession();
+  const original = session.snapshots[0].agents.find(agent => agent.id === 'NE');
+  for (let x = 3; x <= 5; x++) {
+    for (let y = 3; y <= 5; y++) {
+      const address = `${x},${y}`;
+      if (!original.visited.includes(address)) original.visited.push(address);
+    }
+  }
+  const alreadyVisited = [...original.visited];
+  const first = viewEncounterStep(session, 1);
+  const moved = first.agents.find(agent => agent.id === 'NE');
+  assert.notEqual(`${moved.x},${moved.y}`, '4,4');
+  assert.deepEqual(moved.visited, alreadyVisited);
+  assert.deepEqual(moved.trail, ['4,4', `${moved.x},${moved.y}`]);
+  for (let step = 2; step <= 16; step++) {
+    const prior = session.snapshots[step - 1].agents.find(agent => agent.id === 'NE');
+    const next = viewEncounterStep(session, step).agents.find(agent => agent.id === 'NE');
+    assert.deepEqual(next.trail.slice(0, -1), prior.trail);
+    assert.equal(next.trail.at(-1), `${next.x},${next.y}`);
+    const [px, py] = prior.trail.at(-1).split(',').map(Number);
+    assert.ok(Math.max(Math.abs(next.x - px), Math.abs(next.y - py)) <= 1);
+  }
+});
+
 test('each original may create at most one child per episode; lineage and charge are conserved', () => {
   const session = createEncounterSession();
   let mixedCloneDecision = false;

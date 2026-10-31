@@ -1,8 +1,8 @@
 // Copyright 2026 Juri Janovski. SPDX-License-Identifier: Apache-2.0
 import {fourNeighbourPulse, lazyEightNeighbourPulse, pulseMetrics,
   lazyEightNeighbourMetrics} from './experiments/zuse-lattice.js';
-import {createEncounterSession, viewEncounterStep} from './experiments/four-encounters.js?v=20261031-four-corners';
-import {cameraFor, project} from './experiments/zuse-camera.js?v=20261031-four-corners';
+import {createEncounterSession, viewEncounterStep} from './experiments/four-encounters.js?v=20261031-chronological-trails';
+import {cameraFor, project} from './experiments/zuse-camera.js?v=20261031-chronological-trails';
 
 const stepsInput = document.querySelector('#steps');
 const stepValue = document.querySelector('#step-value');
@@ -113,7 +113,7 @@ function drawBodies(snapshot, previous, camera) {
   }
   for (const body of snapshot.agents) {
     ctx.beginPath();
-    body.visited.forEach((address, index) => {
+    body.trail.forEach((address, index) => {
       const [x, y] = address.split(',').map(Number);
       const p = project(x, y, camera);
       if (index === 0) ctx.moveTo(p.x, p.y);
