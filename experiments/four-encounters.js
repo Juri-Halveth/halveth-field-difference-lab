@@ -1,13 +1,13 @@
 // Copyright 2026 Juri Janovski. SPDX-License-Identifier: Apache-2.0
-// A synthetic, stateful companion to the unchanged Zuse lattice comparison.
-// The field is a fixed input for a given step; these agents are a separate model.
-import {lazyEightNeighbourPulse} from './zuse-lattice.js';
+// Four bodies and their paired counter-roles share the original blue lattice.
+// Field values are observed, never used as a force that moves a body.
+import {fourNeighbourPulse} from './zuse-lattice.js';
 
-export const ENCOUNTER_VERSION = 'FOUR_ENCOUNTERS_V1';
-export const MAX_STEP = 8;
+export const ENCOUNTER_VERSION = 'FOUR_CORNERS_V2';
+export const MAX_STEP = 16;
 export const START_SLOTS = Object.freeze([
-  {id: 'A', x: -2, y: -2}, {id: 'B', x: 2, y: -2},
-  {id: 'C', x: -2, y: 2}, {id: 'D', x: 2, y: 2},
+  {id: 'NE', x: 4, y: 4}, {id: 'NW', x: -4, y: 4},
+  {id: 'SW', x: -4, y: -4}, {id: 'SE', x: 4, y: -4},
 ]);
 const MOVES = Object.freeze([
   {id: 'N', dx: 0, dy: 1}, {id: 'NE', dx: 1, dy: 1},
@@ -16,8 +16,11 @@ const MOVES = Object.freeze([
   {id: 'W', dx: -1, dy: 0}, {id: 'NW', dx: -1, dy: 1},
 ]);
 const HUES = Object.freeze(Array.from({length: 12}, (_, index) => index * 30));
+const COUNTER_COMPASS = Object.freeze({
+  NE: [-1, 0], NW: [0, -1], SW: [1, 0], SE: [0, 1],
+});
 const key = (x, y) => `${x},${y}`;
-const inside = (x, y) => x >= -8 && x <= 8 && y >= -8 && y <= 8;
+const inside = (x, y) => x >= -24 && x <= 24 && y >= -24 && y <= 24;
 
 function hashId(id) {
   let hash = 0;
@@ -31,6 +34,8 @@ function hueDistance(a, b) {
 }
 
 function selectHue(agent, others, learner) {
+  // The existing north-east yellow outline is retained as the first body.
+  if (agent.id === 'NE') return 40;
   const learned = learner?.totalReward ?? 0;
   const preference = (hashId(agent.id) * 5 + Math.round(learned * 53) +
     (agent.x + 8) * 11 + (agent.y + 8) * 7) % 360;
@@ -51,9 +56,10 @@ function initialAgents(session) {
   const agents = [];
   for (const slot of START_SLOTS) {
     const agent = {...slot, instanceId: `E${session.episode}/${slot.id}`,
+      counterRoleId: `COUNTER/${slot.id}`,
       parentId: null, parentInstanceId: null, charge: 1, hasCloned: false,
       visited: [key(slot.x, slot.y)]};
-    agent.hue = selectHue(agent, agents, learnerFor(session, agent.id));
+    agent.hue = selectHue(agent, agents, learnerFor(session, agent.counterRoleId));
     agents.push(agent);
   }
   return agents;
@@ -80,47 +86,55 @@ function fieldSignal(cells, maximum, x, y) {
 }
 
 function candidateScore(session, agent, candidate, cells, maximum, occupied) {
-  const learner = learnerFor(session, agent.id);
+  const learner = learnerFor(session, agent.counterRoleId);
   const stat = learner.actions.get(candidate.action) ?? {count: 0, reward: 0};
   const destinationSignal = fieldSignal(cells, maximum, candidate.x, candidate.y);
-  const sourceSignal = fieldSignal(cells, maximum, agent.x, agent.y);
   const newDestination = agent.visited.includes(key(candidate.x, candidate.y)) ? 0 : 1;
   const distances = [...occupied].map(address => {
     const [x, y] = address.split(',').map(Number);
     return Math.abs(candidate.x - x) + Math.abs(candidate.y - y);
   });
   const destinationSeparation = distances.length ? Math.min(1, Math.min(...distances) / 5) : 1;
-  // Cloning evaluates two half-charge positions; moving evaluates one full-charge
-  // position. A child covers another cell, but splitting has an opportunity cost.
+  // The counter-role values space, history and an inward option. The blue
+  // field is recorded as a competing suggestion but has zero decision weight.
   const isClone = candidate.kind === 'CLONE';
-  const signal = isClone ? (sourceSignal + destinationSignal) / 2 : destinationSignal;
   const novelty = isClone ? newDestination / 2 : newDestination;
   const separation = isClone ? Math.min(destinationSeparation, 0.2) : destinationSeparation;
   const exploration = 1 / Math.sqrt(1 + stat.count);
   const remembered = stat.count ? stat.reward / stat.count : 0;
-  const cloneCoverage = isClone ? 0.2 * destinationSeparation : 0;
-  const splitCost = isClone ? 0.04 : 0;
-  const score = 0.52 * signal + 0.18 * novelty + 0.08 * separation +
-    0.24 * exploration + 0.12 * remembered + cloneCoverage - splitCost;
-  return { ...candidate, score, signal, novelty, separation, exploration, remembered,
-    cloneCoverage, splitCost };
+  const freeNeighbours = MOVES.filter(move => inside(candidate.x + move.dx,
+    candidate.y + move.dy) && !occupied.has(key(candidate.x + move.dx,
+      candidate.y + move.dy))).length / MOVES.length;
+  const [preferredX, preferredY] =
+    COUNTER_COMPASS[agent.counterRoleId.split('/')[1].split('.')[0]];
+  const heading = ((candidate.x - agent.x) * preferredX +
+    (candidate.y - agent.y) * preferredY) / Math.SQRT2 * (isClone ? 0.5 : 1);
+  const inward = isClone ? 0 : Math.max(-1, Math.min(1,
+    Math.hypot(agent.x, agent.y) - Math.hypot(candidate.x, candidate.y)));
+  const cloneCoverage = isClone ? 0.24 * destinationSeparation : 0;
+  const splitCost = isClone ? 0.05 : 0;
+  const score = 0.24 * novelty + 0.08 * separation + 0.22 * exploration +
+    0.17 * remembered + 0.12 * freeNeighbours + 0.07 * heading + 0.06 * inward +
+    cloneCoverage - splitCost;
+  return {...candidate, score, fieldSignal: destinationSignal, novelty,
+    separation, exploration, remembered, freeNeighbours, heading, inward,
+    cloneCoverage, splitCost};
 }
 
 function candidatesFor(session, agent, cells, maximum, occupied) {
   const candidates = [{action: 'STAY', kind: 'STAY', x: agent.x, y: agent.y}];
-  // Distinct starting dispositions break the four-way geometric symmetry.
-  // Experience can lower this threshold; no step number schedules a clone.
-  const learner = learnerFor(session, agent.id);
-  const cloneThreshold = 0.22 + (hashId(agent.id) % 4) * 0.12 -
-    Math.min(0.1, learner.totalReward * 0.03);
+  const learner = learnerFor(session, agent.counterRoleId);
+  const readiness = 1 + (hashId(agent.counterRoleId) % 4) * 0.65;
+  const readyToClone = !agent.parentId && !agent.hasCloned &&
+    agent.charge >= 1 && agent.visited.length >= 2 &&
+    learner.totalReward >= readiness;
   for (const move of MOVES) {
     const x = agent.x + move.dx;
     const y = agent.y + move.dy;
     if (!inside(x, y) || occupied.has(key(x, y))) continue;
     candidates.push({action: move.id, kind: 'MOVE', x, y});
     // A child is a fifth identity. The parent keeps half its tracked charge.
-    if (!agent.parentId && !agent.hasCloned && agent.charge >= 1 &&
-      fieldSignal(cells, maximum, agent.x, agent.y) >= cloneThreshold) {
+    if (readyToClone) {
       candidates.push({action: `CLONE_${move.id}`, kind: 'CLONE', x, y});
     }
   }
@@ -131,7 +145,7 @@ function candidatesFor(session, agent, cells, maximum, occupied) {
 function simulateNext(session) {
   const previous = session.snapshots.at(-1);
   const step = previous.step + 1;
-  const cells = lazyEightNeighbourPulse(step);
+  const cells = fourNeighbourPulse(step);
   const maximum = Math.max(...cells.values());
   const agents = previous.agents.map(agent => ({...agent, visited: [...agent.visited]}));
   const occupied = new Set(agents.map(agent => key(agent.x, agent.y)));
@@ -154,23 +168,31 @@ function simulateNext(session) {
       agent.hasCloned = true;
       agent.charge /= 2;
       const child = {id: `${agent.id}.2`, instanceId: `E${session.episode}/${agent.id}.2`,
+        counterRoleId: `${agent.counterRoleId}.2`,
         parentId: agent.id, parentInstanceId: agent.instanceId,
         x: selected.x, y: selected.y, charge: agent.charge,
         hasCloned: true, visited: [key(selected.x, selected.y)]};
-      child.hue = selectHue(child, agents.concat(children), learnerFor(session, child.id));
+      child.hue = selectHue(child, agents.concat(children),
+        learnerFor(session, child.counterRoleId));
       children.push(child);
       occupied.add(key(child.x, child.y));
     }
     occupied.add(key(agent.x, agent.y));
-    const reward = selected.signal + 0.2 * selected.novelty +
+    const reward = 0.2 * selected.novelty + 0.2 * selected.freeNeighbours +
+      0.15 * Math.max(0, selected.heading) +
       selected.cloneCoverage - selected.splitCost;
-    const learner = learnerFor(session, agent.id);
+    const learner = learnerFor(session, agent.counterRoleId);
     const stat = learner.actions.get(selected.action) ?? {count: 0, reward: 0};
     learner.actions.set(selected.action, {count: stat.count + 1, reward: stat.reward + reward});
     learner.totalReward += reward;
-    choices.push({id: agent.id, instanceId: agent.instanceId, from, action: selected.action,
+    const fieldProposal = candidates.filter(candidate => candidate.kind !== 'CLONE').sort((a, b) =>
+      b.fieldSignal - a.fieldSignal || a.action.localeCompare(b.action))[0];
+    choices.push({id: agent.id, instanceId: agent.instanceId,
+      counterRoleId: agent.counterRoleId, from, action: selected.action,
       to: key(selected.x, selected.y), score: selected.score, reward,
-      candidates: candidates.map(({action, score}) => ({action, score}))});
+      fieldProposal: fieldProposal.fieldSignal > 0 ? fieldProposal.action : 'NO_SIGNAL',
+      candidates: candidates.map(({action, score, fieldSignal}) =>
+        ({action, score, fieldSignal}))});
   }
   session.snapshots.push({episode: session.episode, step,
     agents: agents.concat(children).sort((a, b) => a.id.localeCompare(b.id)), choices});
@@ -179,7 +201,7 @@ function simulateNext(session) {
 export function viewEncounterStep(session, step) {
   if (!session || session.version !== ENCOUNTER_VERSION) throw new TypeError('invalid session');
   if (!Number.isInteger(step) || step < 0 || step > MAX_STEP) {
-    throw new RangeError('step must be an integer from 0 to 8');
+    throw new RangeError('step must be an integer from 0 to 16');
   }
   if (step < session.viewedStep && session.direction !== -1) {
     session.episode += 1;

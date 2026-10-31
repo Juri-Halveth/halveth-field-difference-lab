@@ -2,7 +2,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createEncounterSession, viewEncounterStep, START_SLOTS} from './four-encounters.js';
-import {lazyEightNeighbourPulse} from './zuse-lattice.js';
+import {fourNeighbourPulse} from './zuse-lattice.js';
 
 function signatures(snapshot) {
   return snapshot.agents.map(({id, x, y, hue}) => `${id}:${x},${y}:${hue}`);
@@ -12,7 +12,7 @@ function routes(snapshot) {
   return snapshot.agents.map(({id, x, y}) => `${id}:${x},${y}`);
 }
 
-test('four independent starting slots and their colors are derived, not hidden in the wave', () => {
+test('the former north-east marker gains three symmetric body-counter-role pairs', () => {
   const session = createEncounterSession();
   const start = viewEncounterStep(session, 0);
   assert.equal(start.agents.length, 4);
@@ -20,35 +20,38 @@ test('four independent starting slots and their colors are derived, not hidden i
   assert.deepEqual(start.agents.map(agent => agent.instanceId),
     START_SLOTS.map(slot => `E1/${slot.id}`));
   assert.equal(new Set(start.agents.map(agent => agent.hue)).size, 4);
+  assert.equal(start.agents.find(agent => agent.id === 'NE').hue, 40);
+  assert.deepEqual(start.agents.map(agent => agent.counterRoleId),
+    START_SLOTS.map(slot => `COUNTER/${slot.id}`));
   assert.equal(start.agents.reduce((sum, agent) => sum + agent.charge, 0), 4);
 });
 
 test('a downward slider reversal opens exactly one new episode and keeps the field invariant', () => {
   const session = createEncounterSession();
-  const first = viewEncounterStep(session, 8);
+  const first = viewEncounterStep(session, 16);
   const firstChoices = structuredClone(first.choices);
-  const field = [...lazyEightNeighbourPulse(7)].sort();
-  const second = viewEncounterStep(session, 7);
+  const field = [...fourNeighbourPulse(15)].sort();
+  const second = viewEncounterStep(session, 15);
   assert.equal(second.episode, 2);
   assert.equal(session.episodes.length, 1);
   assert.equal(session.episodes[0].episode, 1);
-  assert.deepEqual(session.episodes[0].snapshots[8].choices, firstChoices);
+  assert.deepEqual(session.episodes[0].snapshots[16].choices, firstChoices);
   assert.ok(second.agents.every(agent => agent.instanceId.startsWith('E2/')));
-  assert.ok(session.episodes[0].snapshots[7].agents.every(agent =>
+  assert.ok(session.episodes[0].snapshots[15].agents.every(agent =>
     agent.instanceId.startsWith('E1/')));
-  assert.notDeepEqual(signatures(second), signatures(viewEncounterStep(createEncounterSession(), 7)));
-  viewEncounterStep(session, 6);
+  assert.notDeepEqual(signatures(second), signatures(viewEncounterStep(createEncounterSession(), 15)));
+  viewEncounterStep(session, 14);
   assert.equal(session.episode, 2);
-  assert.deepEqual([...lazyEightNeighbourPulse(7)].sort(), field);
+  assert.deepEqual([...fourNeighbourPulse(15)].sort(), field);
   assert.ok(first.agents.length >= 4);
 });
 
 test('same slider history is reproducible; learned experience changes a later route without randomness', () => {
   function run() {
     const session = createEncounterSession();
-    const first = viewEncounterStep(session, 8);
-    viewEncounterStep(session, 7);
-    const second = viewEncounterStep(session, 8);
+    const first = viewEncounterStep(session, 16);
+    viewEncounterStep(session, 15);
+    const second = viewEncounterStep(session, 16);
     return {first: signatures(first), second: signatures(second)};
   }
   assert.deepEqual(run(), run());
@@ -56,21 +59,34 @@ test('same slider history is reproducible; learned experience changes a later ro
   assert.notDeepEqual(first, second);
 
   const learned = createEncounterSession();
-  viewEncounterStep(learned, 8);
-  const learnedSecond = viewEncounterStep(learned, 7);
+  viewEncounterStep(learned, 16);
+  const learnedSecond = viewEncounterStep(learned, 15);
   const resetControl = createEncounterSession();
-  viewEncounterStep(resetControl, 8);
+  viewEncounterStep(resetControl, 16);
   resetControl.learning = new Map();
-  const resetSecond = viewEncounterStep(resetControl, 7);
-  assert.deepEqual(routes(resetSecond), routes(viewEncounterStep(createEncounterSession(), 7)));
+  const resetSecond = viewEncounterStep(resetControl, 15);
+  assert.deepEqual(routes(resetSecond), routes(viewEncounterStep(createEncounterSession(), 15)));
   assert.notDeepEqual(routes(learnedSecond), routes(resetSecond));
+});
+
+test('the blue field can suggest another action without displacing a body', () => {
+  const snapshot = viewEncounterStep(createEncounterSession(), 4);
+  const disagreements = snapshot.choices.filter(choice =>
+    choice.fieldProposal !== 'NO_SIGNAL' &&
+    choice.fieldProposal !== choice.action);
+  assert.ok(disagreements.length > 0);
+  for (const choice of disagreements) {
+    assert.ok(choice.candidates.some(candidate =>
+      candidate.action === choice.fieldProposal && candidate.fieldSignal > 0));
+    assert.equal(choice.score, Math.max(...choice.candidates.map(candidate => candidate.score)));
+  }
 });
 
 test('each original may create at most one child per episode; lineage and charge are conserved', () => {
   const session = createEncounterSession();
   let mixedCloneDecision = false;
   let eligibleButMoved = false;
-  for (let step = 0; step <= 8; step++) {
+  for (let step = 0; step <= 16; step++) {
     const snapshot = viewEncounterStep(session, step);
     const childCount = snapshot.agents.filter(agent => agent.parentId).length;
     if (childCount > 0 && childCount < START_SLOTS.length) mixedCloneDecision = true;
@@ -79,7 +95,7 @@ test('each original may create at most one child per episode; lineage and charge
       snapshot.agents.length);
     assert.equal(new Set(snapshot.agents.map(agent => agent.hue)).size,
       snapshot.agents.length);
-    assert.ok(snapshot.agents.every(agent => Math.abs(agent.x) <= 8 && Math.abs(agent.y) <= 8));
+    assert.ok(snapshot.agents.every(agent => Math.abs(agent.x) <= 24 && Math.abs(agent.y) <= 24));
     for (const original of START_SLOTS) {
       const children = snapshot.agents.filter(agent => agent.parentId === original.id);
       assert.ok(children.length <= 1);
@@ -98,17 +114,17 @@ test('each original may create at most one child per episode; lineage and charge
   }
   assert.equal(mixedCloneDecision, true, 'one global clone clock must not drive all four');
   assert.equal(eligibleButMoved, true, 'eligible cloning must not outrank every move');
-  assert.ok(viewEncounterStep(session, 8).agents.some(agent => agent.parentId));
+  assert.ok(viewEncounterStep(session, 16).agents.some(agent => agent.parentId));
   for (let repeat = 0; repeat < 20; repeat++) {
-    viewEncounterStep(session, 7);
-    const later = viewEncounterStep(session, 8);
+    viewEncounterStep(session, 15);
+    const later = viewEncounterStep(session, 16);
     assert.equal(new Set(later.agents.map(agent => agent.hue)).size, later.agents.length);
   }
 });
 
 test('invalid horizons and sessions are rejected explicitly', () => {
   const session = createEncounterSession();
-  for (const step of [-1, 1.5, 9, NaN]) {
+  for (const step of [-1, 1.5, 17, NaN]) {
     assert.throws(() => viewEncounterStep(session, step), RangeError);
   }
   assert.throws(() => viewEncounterStep({}, 1), TypeError);
