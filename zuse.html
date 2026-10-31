@@ -5,10 +5,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#080b17">
-  <meta name="description" content="Juri Janovskis interaktiver HALVETH-Forschungsraum: Zwei Gitterregeln mit gleicher Varianz und verschiedene Wege von vier synthetischen Modellquadraten.">
+  <meta name="description" content="Juri Janovskis interaktives HALVETH-Feldlabor: zwei Gitterregeln, vier Quadrate mit Gegenrollen und eine sichtbare Drehung der Ansicht am Rand.">
   <title>Gleiche Statistik. Andere Welt. · HALVETH Forschung</title>
   <link rel="canonical" href="https://juri-halveth.github.io/halveth-field-difference-lab/zuse.html">
-  <link rel="stylesheet" href="zuse.css?v=20261031-four-encounters">
+  <link rel="stylesheet" href="zuse.css?v=20261031-four-corners">
 </head>
 <body>
   <a class="skip" href="#experiment">Zum Experiment springen</a>
@@ -23,25 +23,18 @@
     </section>
 
     <section id="experiment" class="experiment" aria-labelledby="experiment-title">
-      <div class="section-heading"><p class="eyebrow">01 / GEGENPROBE</p><h2 id="experiment-title">Ein Startpunkt. Zwei Regeln.</h2><p>Bewege den Regler. Die leuchtenden Zellen zeigen, welche Positionen nach genau dieser Schrittzahl erreichbar sind. Wechsle zur Intensität, um die verteilte Menge zu sehen.</p></div>
+      <div class="section-heading"><p class="eyebrow">01 / GEGENPROBE</p><h2 id="experiment-title">Ein Feld. Vier freie Plätze.</h2><p>Der ursprüngliche Impuls bleibt als Messmodell erhalten. Im blauen Gitter stehen nun vier eigene Quadrate. Ihr Startabstand 4 übernimmt die Position des früheren gelben Messrahmens bei Schritt 4 und ergänzt die drei symmetrischen Ecken. Bewege den Regler und beobachte Feld, Körper und Gegenrolle getrennt.</p></div>
       <div class="controls">
-        <label for="steps">Schritte <output id="step-value" for="steps">4</output></label>
-        <input id="steps" type="range" min="0" max="8" step="1" value="4">
+        <label for="steps">Schritte <output id="step-value" for="steps">0</output></label>
+        <input id="steps" type="range" min="0" max="16" step="1" value="0">
         <fieldset><legend>Darstellung</legend><label><input type="radio" name="view" value="support" checked> Erreichbare Zellen</label><label><input type="radio" name="view" value="intensity"> Intensität</label></fieldset>
       </div>
       <div class="grid-pair">
-        <article class="model-card four"><div class="card-head"><span>REGEL A</span><h3>Vier Nachbarn</h3><p>Je ¼ nach Norden, Süden, Osten und Westen.</p></div><canvas id="four-grid" width="544" height="544" role="img" aria-label="Erreichbare Zellen der Vier-Nachbarn-Regel"></canvas><dl id="four-metrics" class="readouts"></dl></article>
-        <article class="model-card eight"><div class="card-head"><span>REGEL B</span><h3>Acht Nachbarn + Verbleib</h3><p>Je ¹⁄₁₂ zu acht Nachbarn; ⅓ bleibt am Ort.</p></div><canvas id="eight-grid" width="544" height="544" role="img" aria-label="Erreichbare Zellen der Acht-Nachbarn-Regel mit Verbleib"></canvas><dl id="eight-metrics" class="readouts"></dl></article>
+        <article class="model-card four"><div class="card-head"><span>REGEL A · KÖRPER IM FELD</span><h3>Vier Nachbarn</h3><p>Je ¼ Feldwert nach Norden, Süden, Osten und Westen. Die vier farbigen Rahmen sind eigenständige Zustände; die blaue Welle schiebt sie nicht.</p></div><canvas id="four-grid" width="544" height="544" role="img" aria-label="Vier-Nachbarn-Feld mit vier eigenständigen Quadraten"></canvas><div class="body-panel"><h4 id="body-status">Vier Paare</h4><p id="body-summary"></p><p id="camera-note" class="camera-note"></p><ul id="body-list" class="body-list" aria-label="Körper und Gegenrollen"></ul><details><summary>Entscheidungen dieses Schritts</summary><ol id="body-log"></ol></details><p class="camera-note">Körper = sichtbare Position. Gegenrolle = eigene Entscheidungsregel, als Juris „Seele“ gedacht. Ein Abbild erhält eigene Herkunft. Die vier ursprünglichen Paare bleiben erkennbar.</p></div><dl id="four-metrics" class="readouts"></dl></article>
+        <article class="model-card eight"><div class="card-head"><span>REGEL B · KONTROLLE</span><h3>Acht Nachbarn + Verbleib</h3><p>Je ¹⁄₁₂ zu acht Nachbarn; ⅓ bleibt am Ort. Der gestrichelte Rahmen markiert nur die Messzelle.</p></div><canvas id="eight-grid" width="544" height="544" role="img" aria-label="Erreichbare Zellen der Acht-Nachbarn-Regel mit Verbleib"></canvas><dl id="eight-metrics" class="readouts"></dl></article>
       </div>
       <div class="insight" role="status" aria-live="polite"><span>DER UNTERSCHIED</span><p id="insight-text"></p></div>
-      <section class="encounter" aria-labelledby="encounter-title">
-        <div class="section-heading"><p class="eyebrow">01B / VIER FREIE PLÄTZE</p><h2 id="encounter-title">Die Welle bleibt. Ihre Wege lernen.</h2><p>Vier eigene Quadrate starten auf vier Plätzen. Jeder Zug nutzt das aktuelle Feld, die belegten Positionen, freie Nachbarzellen und die eigene Zugerfahrung. Beim ersten Rückwärtsziehen des Reglers beginnt ein neuer Durchlauf: Die Welle zum gewählten Schritt bleibt gleich, die gesammelte Zugerfahrung bleibt erhalten. Darum kann der nächste Weg anders aussehen, ohne Zufall.</p></div>
-        <div class="encounter-layout">
-          <div class="encounter-stage"><canvas id="encounter-grid" width="544" height="544" role="img" aria-label="Vier synthetische Quadrate auf dem Gitter"></canvas><p class="encounter-key">Leuchtendes Feld: unveränderte Regel B · farbige Quadrate: eigenständige Modellzustände · weißer Rahmen: neues Abbild · gestrichelte Kontur: Position im vorigen Durchlauf</p></div>
-          <div class="encounter-readout"><p class="eyebrow">BEOBACHTBARER DURCHLAUF</p><h3 id="encounter-status">Vier Plätze</h3><p id="encounter-summary"></p><ul id="encounter-entities" class="encounter-entities" aria-label="Quadrate mit Farbe, Position und Herkunft"></ul><ol id="encounter-log" aria-label="Entscheidungen im gezeigten Schritt"></ol><p class="encounter-note">Farben, Schritte und der einmal mögliche Abbild-Zug folgen einer offengelegten Zustandsregel. „Wählen“ bedeutet hier eine berechnete Entscheidung im Modell. Beim Abbilden wird die verfolgte Menge geteilt; es entsteht keine zusätzliche Menge.</p></div>
-        </div>
-      </section>
-      <p class="method">Beide Regeln erhalten die Gesamtmenge und besitzen pro Schritt dieselbe Varianz von ½ in X und Y. Ihre Einzelschritte und maximalen Reichweiten sind verschieden. Helle Zellen im Modus „Erreichbare Zellen“ zeigen auch extrem kleine positive Mengen; der Intensitätsmodus zeigt deren Größenverhältnis. Endliche Genauigkeit und eine Messschwelle können die äußersten Zellen in einer realen Beobachtung verdecken.</p>
+      <p class="method">Beide Feldregeln erhalten die Gesamtmenge und besitzen pro Schritt dieselbe Varianz von ½ in X und Y. Die vier Körper sind eine eigene Modellebene, keine vier neuen Feldquellen. Bei Schritt 8 erreicht die blaue Raute die äußerste Zellenreihe des ersten 17×17-Fensters. Danach dreht sich ihre <em>Ansicht</em> mit dem inneren Gitter bis 45°; sobald auch das nicht reicht, wächst der sichtbare Koordinatenbereich durch Skalierung. Die festen Linien des dunklen Sichtfensters zeigen vier Quadranten mit Unterbereichen. Feldwerte und Messgrößen werden dabei nicht gedreht. Rückwärtsziehen beginnt einen neuen Körperdurchlauf mit bisheriger Zugerfahrung; der ursprüngliche Feldwert eines Schritts bleibt gleich.</p>
     </section>
 
     <section class="history" id="quellen" aria-labelledby="sources-title">
@@ -60,6 +53,6 @@
     </section>
   </main>
   <footer><span>Juri Janovski / HALVETH · Forschung und Implementierung 2026</span><nav><a href="index.html">Feldlabor</a><a href="https://github.com/Juri-Halveth/halveth-field-difference-lab/blob/main/ZUSE_GRID_MODEL.md">Methodennotiz</a><a href="https://github.com/Juri-Halveth/halveth-field-difference-lab">GitHub</a></nav></footer>
-  <script type="module" src="zuse.js?v=20261031-four-encounters"></script>
+  <script type="module" src="zuse.js?v=20261031-four-corners"></script>
 </body>
 </html>

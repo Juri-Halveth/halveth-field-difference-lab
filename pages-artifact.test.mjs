@@ -92,16 +92,19 @@ function assertAtomRoomResolves(site) {
 
 function assertZuseEncounterRoomResolves(site) {
   const room = readFileSync(join(site, 'zuse.html'), 'utf8');
-  assert.match(room, /id="encounter-grid"/, 'the four-place canvas is published');
+  assert.match(room, /id="four-grid"/, 'the four bodies appear in the original grid');
+  assert.match(room, /id="body-list"/, 'the body-counter-role readout is published');
+  assert.doesNotMatch(room, /id="encounter-grid"/, 'no unrelated third canvas remains');
   const cssVersion = room.match(/href="zuse\.css\?v=([^"]+)"/)?.[1];
   const jsVersion = room.match(/src="zuse\.js\?v=([^"]+)"/)?.[1];
   assert.ok(cssVersion, 'the Zuse stylesheet has a release-specific cache key');
   assert.equal(jsVersion, cssVersion, 'script and stylesheet share the release cache key');
   const view = readFileSync(join(site, 'zuse.js'), 'utf8');
   const imports = [...view.matchAll(/\bfrom\s+['"](\.[^'"]+)['"]/g)].map(([, path]) => path);
-  assert.ok(imports.includes('./experiments/four-encounters.js'));
+  assert.ok(imports.includes(`./experiments/four-encounters.js?v=${jsVersion}`));
+  assert.ok(imports.includes(`./experiments/zuse-camera.js?v=${jsVersion}`));
   for (const path of imports) {
-    const target = resolve(site, path);
+    const target = resolve(site, path.split(/[?#]/)[0]);
     assert.ok(target.startsWith(`${resolve(site)}${sep}`), `zuse module stays in the published site: ${path}`);
     assert.ok(existsSync(target), `missing published zuse module import ${path}`);
   }
