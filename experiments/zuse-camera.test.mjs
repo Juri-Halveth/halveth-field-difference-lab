@@ -47,7 +47,7 @@ test('whole rotated field tiles and every body trail remain within the view', ()
     const snapshot = viewEncounterStep(session, step);
     const camera = cameraFor(step, 'four', snapshot.agents);
     const addresses = [...fourNeighbourPulse(step).keys()];
-    for (const body of snapshot.agents) addresses.push(...body.visited);
+    for (const body of snapshot.agents) addresses.push(...body.trail);
     const halfTile = camera.scale * 544 / 17 *
       (Math.cos(camera.angle) + Math.sin(camera.angle)) / 2;
     for (const address of addresses) {

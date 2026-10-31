@@ -58,7 +58,7 @@ function initialAgents(session) {
     const agent = {...slot, instanceId: `E${session.episode}/${slot.id}`,
       counterRoleId: `COUNTER/${slot.id}`,
       parentId: null, parentInstanceId: null, charge: 1, hasCloned: false,
-      visited: [key(slot.x, slot.y)]};
+      visited: [key(slot.x, slot.y)], trail: [key(slot.x, slot.y)]};
     agent.hue = selectHue(agent, agents, learnerFor(session, agent.counterRoleId));
     agents.push(agent);
   }
@@ -147,7 +147,8 @@ function simulateNext(session) {
   const step = previous.step + 1;
   const cells = fourNeighbourPulse(step);
   const maximum = Math.max(...cells.values());
-  const agents = previous.agents.map(agent => ({...agent, visited: [...agent.visited]}));
+  const agents = previous.agents.map(agent => ({...agent,
+    visited: [...agent.visited], trail: [...agent.trail]}));
   const occupied = new Set(agents.map(agent => key(agent.x, agent.y)));
   const choices = [];
   const order = [...agents].sort((a, b) => a.id.localeCompare(b.id));
@@ -171,12 +172,15 @@ function simulateNext(session) {
         counterRoleId: `${agent.counterRoleId}.2`,
         parentId: agent.id, parentInstanceId: agent.instanceId,
         x: selected.x, y: selected.y, charge: agent.charge,
-        hasCloned: true, visited: [key(selected.x, selected.y)]};
+        hasCloned: true, visited: [key(selected.x, selected.y)],
+        trail: [key(selected.x, selected.y)]};
       child.hue = selectHue(child, agents.concat(children),
         learnerFor(session, child.counterRoleId));
       children.push(child);
       occupied.add(key(child.x, child.y));
     }
+    // Chronological trail keeps revisits and stationary steps; visited stays unique.
+    agent.trail.push(key(agent.x, agent.y));
     occupied.add(key(agent.x, agent.y));
     const reward = 0.2 * selected.novelty + 0.2 * selected.freeNeighbours +
       0.15 * Math.max(0, selected.heading) +

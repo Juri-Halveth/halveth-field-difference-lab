@@ -15,7 +15,7 @@ function extentAt(step, model, agents, angle) {
   let extent = model === 'four' ? step * Math.max(cosine, sine) : step;
   for (const agent of agents) {
     const points = [{x: agent.x, y: agent.y}].concat(
-      (agent.visited ?? []).map(address => {
+      (agent.trail ?? []).map(address => {
         const [x, y] = address.split(',').map(Number);
         return {x, y};
       }));
