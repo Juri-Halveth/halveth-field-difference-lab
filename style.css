@@ -24,3 +24,5 @@
   .examples button,#export-receipt{min-height:44px}
   .kicker{overflow-wrap:anywhere}
 }
+/* Project gateway to the public HALVETH NETZ room. */
+.netz-gateway{display:inline-flex;align-items:center;gap:12px;max-width:100%;margin:16px 0 2px;padding:6px 13px 6px 6px;border:1px solid #457d8c;border-radius:10px;background:#10212d;color:#bbecf4;text-decoration:none}.netz-gateway img{display:block;width:150px;height:40px;object-fit:cover;border-radius:6px}.netz-gateway span{display:grid;gap:3px;font-size:10px;letter-spacing:.12em}.netz-gateway strong{color:#fff;font-size:12px;letter-spacing:0}.netz-gateway:hover,.netz-gateway:focus-visible{border-color:#bbecf4}@media(max-width:600px){.netz-gateway img{width:100px;height:34px}.netz-gateway strong{font-size:11px}}
