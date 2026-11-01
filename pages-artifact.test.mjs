@@ -19,6 +19,7 @@ function withPublishedSite(check) {
       if (entry.isFile()) copyFileSync(join(root, entry.name), join(temp, entry.name));
     }
     cpSync(join(root, 'experiments'), join(temp, 'experiments'), { recursive: true });
+    cpSync(join(root, 'assets'), join(temp, 'assets'), { recursive: true });
     const shell = process.platform === 'win32' ? 'C:\\Program Files\\Git\\bin\\bash.exe' : 'bash';
     execFileSync(shell, ['--noprofile', '--norc', '-c', commands], {
       cwd: temp, env: { ...process.env, BASH_ENV: '' }, stdio: 'pipe',
