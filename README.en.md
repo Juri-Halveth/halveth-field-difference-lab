@@ -1,11 +1,10 @@
-# Feldlabor – Bewegung und Zustandswechsel sichtbar machen
+# Field Difference Lab · same starting state, different rule
 
-Ein eigenständiges visuelles Modelllabor. Die Experimente vergleichen deklarierte Regeln und zeigen ihre Auswirkungen auf Bewegung und Darstellung.
+An independent visual model laboratory. Three experiments on the start page compare declared rules for motion and a synthetic software representation boundary; two further rooms explore separate questions. Values in the motion models are dimensionless. This is not a real-world measurement or a target scanner.
 
-[**Projekt öffnen →**](https://juri-halveth.github.io/halveth-field-difference-lab/) · [Arbeitsproben](https://juri-halveth.github.io/koennen/) · [Portfolio](https://juri-halveth.github.io/)
+[**Try the experiments directly**](https://juri-halveth.github.io/halveth-field-difference-lab/) · [Original German guide](README.md) · [Model source](physics.js)
 
-
-Standalone, local-first visual laboratory for the question: What changes when the same entity encounters a different field rule? The start page has three experiments; two separate research rooms extend the question. The third panel translates the **question pattern** to a synthetic software representation boundary. Open `index.html` in a browser with ES module support. If local `file://` modules are blocked by the browser, serve this directory locally, for example `python -m http.server 8846 --bind 127.0.0.1` and open `http://127.0.0.1:8846/`.
+For a local preview, open `index.html` in a browser with ES module support. If `file://` modules are blocked, serve this directory with `python -m http.server 8846 --bind 127.0.0.1` and open `http://127.0.0.1:8846/`.
 
 **Project direction:** Juri Janovski / HALVETH. **License:** Apache-2.0 for the original content here. See [NOTICE](NOTICE) and [project identity](PROJECT_IDENTITY.md). This is a local model laboratory, not a target scanner.
 
