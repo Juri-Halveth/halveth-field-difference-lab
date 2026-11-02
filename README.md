@@ -2,18 +2,13 @@
 
 # Field Difference Lab · gleiche Ausgangslage, andere Regel
 
-[![Field Difference im HALVETH NETZ: drei Bahnen mit gemeinsamem Start und Grenzlinie](assets/netz-starship-hero.svg)](https://juri-halveth.github.io/universum/)
+Was verändert sich, wenn dieselbe Bewegung unter einer anderen Modellregel abläuft? Dieses Browserlabor stellt die Verläufe nebeneinander: drei Experimente auf der Startseite und zwei eigenständige Forschungsräume. Die Werte sind dimensionslos; die Anzeige ist eine Modellsimulation, keine Messreihe.
 
-**Im NETZ:** [Interaktives Starship Lab öffnen](https://juri-halveth.github.io/universum/) · Themen: Modelle & Visualisierung. Im Katalog dieses Projekt wählen; die eigene Anwendung und ihre Quellen bleiben hier dokumentiert.
+[**Im Browser direkt ausprobieren**](https://juri-halveth.github.io/halveth-field-difference-lab/) · [Gleichungen und Methoden](README.en.md) · [Quellcode](physics.js)
 
+![Field Difference: drei Bahnen mit gemeinsamem Start und Grenzlinie](assets/netz-starship-hero.svg)
 
-Was verändert sich, wenn dieselbe Bewegung unter einer anderen Modellregel
-abläuft? Dieses Browserlabor stellt die Verläufe nebeneinander — zum Lernen,
-Erklären und Prüfen eigener Modellannahmen. Die Startseite enthält drei
-Experimente; zwei eigenständige Forschungsräume vertiefen andere Fragen.
-
-[**Im Browser ausprobieren**](https://juri-halveth.github.io/halveth-field-difference-lab/) ·
-[Gleichungen und Methoden](README.en.md) · [Quellcode](physics.js)
+[Starship Lab als optionaler HALVETH-Überblick](https://juri-halveth.github.io/universum/)
 
 ## Drei Experimente auf der Startseite
 
